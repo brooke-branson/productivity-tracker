@@ -13,8 +13,36 @@ class TaskStatus(str, Enum):
     IN_PROGRESS = "in-progress"
     COMPLETED = "completed"
 
+class Category(str, Enum):
+    PERSONAL = "personal"
+    WORK = "work"
+    LEARNING = "learning"
+    FITNESS = "fitness"
+    OTHER = "other"
+    UNCATEGORIZED = "uncategorized"
+
+class FocusLevel(int, Enum):
+    VERY_LOW = 1
+    LOW = 2
+    MEDIUM = 3
+    HIGH = 4
+    VERY_HIGH = 5
 
 class Task(Base):
+    """Model for the task table.
+
+        Fields:
+        - id: int
+        - name: str
+        - category: str
+        - status: str
+        - time_spent_minutes: int | None
+        - focus_level: int | None
+        - created_at: datetime
+        - updated_at: datetime
+        - completed_at: datetime | None
+        
+    """
     __tablename__ = "tasks"
 
     id: Mapped[int] = mapped_column(Integer,
@@ -26,9 +54,10 @@ class Task(Base):
         nullable=False,
         )
 
-    category: Mapped[str | None] = mapped_column(
+    category: Mapped[str] = mapped_column(
         String(255),
-        nullable=True, ## Set this to nullable for now, may be required when task is completed.
+        nullable=False, 
+        default=Category.UNCATEGORIZED.value ## Defaulting to uncategorized as the initial value, and can be updated when task is completed or whenever user want to change.
         )
 
     status: Mapped[str] = mapped_column(
@@ -37,7 +66,7 @@ class Task(Base):
         default=TaskStatus.PLANNED.value ## Similar to the category, I set the default value to the planned enum, but this is open to change based on feedback.
         )
 
-    time_spent: Mapped[int | None] = mapped_column(
+    time_spent_minutes: Mapped[int | None] = mapped_column(
         Integer,
         nullable=True,
         )
