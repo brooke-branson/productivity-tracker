@@ -32,3 +32,12 @@ and implementation overhead for a one-week build. Additionally I have more exper
 Tradeoff:
 TypeScript would provide stronger compile-time guarantees, but the added
 type-definition work is not necessary for the scope of this project.
+
+## Data Models
+
+    10-6 waiting on feedback from team to decide on the Tasks data model:
+        Need verification on focus level being completely user based, or provide a few options
+        Need verification on category, same issue, user based or provided options.
+
+        Will carry forward with the design around, leaving room to fix these. Designing around the idea that they are nullable when task is created, and required when task is marked as completed.
+        
