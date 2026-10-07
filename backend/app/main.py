@@ -9,6 +9,7 @@ from app.schemas.task_schema import TaskCreate, TaskUpdate, TaskResponse
 from app.db.base import Base
 from app.db.session import engine
 
+Base.metadata.drop_all(bind=engine)
 Base.metadata.create_all(bind=engine)
 app = FastAPI()
 

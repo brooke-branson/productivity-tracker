@@ -39,6 +39,7 @@ class Task(Base):
         - time_spent_minutes: int | None
         - focus_level: int | None
         - created_at: datetime
+        - started_at: datetime | None
         - updated_at: datetime
         - completed_at: datetime | None
 
@@ -80,6 +81,11 @@ class Task(Base):
         DateTime,
         default=func.now(),
         nullable=False
+    )
+
+    started_at: Mapped[datetime | None] = mapped_column(
+        DateTime,
+        nullable=True
     )
 
     updated_at: Mapped[datetime] = mapped_column(

@@ -13,6 +13,7 @@ class TaskUpdate(BaseModel):
     status: TaskStatus | None = None
     time_spent_minutes: int | None = Field(default=None, ge=0)
     focus_level: FocusLevel | None = None
+    started_at: datetime | None = None
 
 class TaskResponse(BaseModel):
     id: int
@@ -22,6 +23,7 @@ class TaskResponse(BaseModel):
     time_spent_minutes: int | None
     focus_level: FocusLevel | None
     created_at: datetime
+    started_at: datetime | None
     updated_at: datetime
     completed_at: datetime | None
 
