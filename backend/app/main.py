@@ -9,7 +9,7 @@ from app.schemas.task_schema import TaskCreate, TaskUpdate, TaskResponse
 from app.db.base import Base
 from app.db.session import engine
 
-Base.metadata.drop_all(bind=engine)
+Base.metadata.drop_all(bind=engine) ## TODO: Remove this in production
 Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
@@ -17,6 +17,7 @@ app = FastAPI()
 def health_check():
     return {"status": "ok"}
 
+## CRUD endpoints for the Task model.
 @app.post("/tasks", response_model=TaskResponse)
 def create_task_endpoint(task_create: TaskCreate, db: Session = Depends(get_db)):
     task = create_task(db, task_create)
@@ -24,7 +25,7 @@ def create_task_endpoint(task_create: TaskCreate, db: Session = Depends(get_db))
         raise HTTPException(status_code=400, detail="Failed to create task")
     return task
 
-@app.put("/tasks/{task_id}", response_model=TaskResponse)
+@app.patch("/tasks/{task_id}", response_model=TaskResponse)
 def update_task_endpoint(task_id: int, task_update: TaskUpdate, db: Session = Depends(get_db)):
     task = update_task(db, task_id, task_update)
     if not task:
@@ -49,3 +50,5 @@ def delete_task_endpoint(task_id: int, db: Session = Depends(get_db)):
     if not task:
         raise HTTPException(status_code=404, detail="Task not found")
     return task
+
+## End of CRUD endpoints for the Task model.
