@@ -41,7 +41,7 @@ class Task(Base):
         - created_at: datetime
         - updated_at: datetime
         - completed_at: datetime | None
-        
+
     """
     __tablename__ = "tasks"
 
