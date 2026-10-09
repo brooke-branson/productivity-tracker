@@ -46,8 +46,10 @@ class Task(Base):
     """
     __tablename__ = "tasks"
 
-    id: Mapped[int] = mapped_column(Integer,
-     primary_key=True,
+    id: Mapped[int] = mapped_column(
+        Integer,
+        primary_key=True,
+        autoincrement=True,
      )
 
     name: Mapped[str] = mapped_column(
