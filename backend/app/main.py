@@ -8,7 +8,8 @@ from app.crud.task_crud import create_task, update_task, list_tasks, get_task, d
 from app.schemas.task_schema import TaskCreate, TaskUpdate, TaskResponse
 from app.db.base import Base
 from app.db.session import engine
-
+from app.services.weekly_summary_service import calc_weekly_metrics
+from datetime import datetime
 # Base.metadata.drop_all(bind=engine) ## TODO: Remove this in production
 Base.metadata.create_all(bind=engine)
 app = FastAPI()
@@ -52,3 +53,10 @@ def delete_task_endpoint(task_id: int, db: Session = Depends(get_db)):
     return task
 
 ## End of CRUD endpoints for the Task model.
+
+## Weekly summary endpoint.
+@app.get("/weekly-summary/{week_start_date}", response_model=dict)
+def get_weekly_summary(week_start_date: str, db: Session = Depends(get_db)):
+    week_start_date = datetime.strptime(week_start_date, "%Y-%m-%d")
+    weekly_summary = calc_weekly_metrics(db, week_start_date)
+    return weekly_summary
