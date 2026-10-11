@@ -2,14 +2,14 @@ from fastapi import FastAPI, Depends
 from fastapi.exceptions import HTTPException
 
 from app.db.session import Session, get_db
-from app.db.models.task_model import Task
-
 from app.crud.task_crud import create_task, update_task, list_tasks, get_task, del_task
 from app.schemas.task_schema import TaskCreate, TaskUpdate, TaskResponse
+from app.schemas.weekly_summary_schema import WeeklySummaryResponse
+from app.crud.weekly_summary_crud import get_weekly_summary
 from app.db.base import Base
 from app.db.session import engine
-from app.services.weekly_summary_service import calc_weekly_metrics
-from datetime import datetime
+
+from app.services.weekly_summary_service import generate_weekly_summary, calc_weekly_metrics
 # Base.metadata.drop_all(bind=engine) ## TODO: Remove this in production
 Base.metadata.create_all(bind=engine)
 app = FastAPI()
@@ -55,8 +55,14 @@ def delete_task_endpoint(task_id: int, db: Session = Depends(get_db)):
 ## End of CRUD endpoints for the Task model.
 
 ## Weekly summary endpoint.
-@app.get("/weekly-summary/{week_start_date}", response_model=dict)
-def get_weekly_summary(week_start_date: str, db: Session = Depends(get_db)):
-    week_start_date = datetime.strptime(week_start_date, "%Y-%m-%d")
-    weekly_summary = calc_weekly_metrics(db, week_start_date)
+@app.post("/weekly-summary/{week_start_date}", response_model=WeeklySummaryResponse)
+def generate_weekly_summary_endpoint(week_start_date: str, db: Session = Depends(get_db)):
+    weekly_metrics = calc_weekly_metrics(db, week_start_date)
+    return generate_weekly_summary(db, weekly_metrics)
+
+@app.get("/weekly-summary/{week_start_date}", response_model=WeeklySummaryResponse)
+def get_weekly_summary_endpoint(week_start_date: str, db: Session = Depends(get_db)):
+    weekly_summary = get_weekly_summary(db, week_start_date)
+    if not weekly_summary:
+        raise HTTPException(status_code=404, detail="Weekly summary not found")
     return weekly_summary

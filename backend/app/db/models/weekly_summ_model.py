@@ -24,11 +24,12 @@ class WeeklySummary(Base):
     - category_distribution: dict[str, int]
 
     - weekly_summary_notes: str | None
-    - weekly_summary_suggestions: str | None
+    - weekly_summary_suggestions: list[str]
+    - related_tasks: list[int]
 
     - created_at: datetime
     - updated_at: datetime
-    
+
     """
 
     __tablename__ = "weekly_summaries"
@@ -89,9 +90,15 @@ class WeeklySummary(Base):
         nullable=True
         )
 
-    weekly_summary_suggestions: Mapped[str | None] = mapped_column(
-        Text,
-        nullable=True
+    weekly_summary_suggestions: Mapped[list[str]] = mapped_column(
+        JSON,
+        nullable=False,
+        default=list
+        )
+    related_tasks: Mapped[list[int]] = mapped_column(
+        JSON,
+        nullable=False,
+        default=list
         )
     
     created_at: Mapped[datetime] = mapped_column(

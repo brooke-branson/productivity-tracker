@@ -1,14 +1,23 @@
 from sqlalchemy import select
-
+from google import genai
+from google.genai import types
+import os
+import json
+from dotenv import load_dotenv
 from app.db.models.task_model import Task, TaskStatus
+from app.db.models.weekly_summ_model import WeeklySummary
+from app.crud.weekly_summary_crud import save_weekly_summary
 from app.schemas.task_schema import TaskResponse
-
+from app.schemas.weekly_summary_schema import GeneratedWeeklySummary
 from datetime import datetime, timedelta
+
+load_dotenv()
+
 def calc_weekly_metrics(db, week_start_date: datetime):
 
     ## Normalizing the week start date to be at the start of the day.
 
-    week_start_date = week_start_date.replace(
+    week_start_date = datetime.strptime(week_start_date, "%Y-%m-%d").replace(
     hour=0,
     minute=0,
     second=0,
@@ -156,3 +165,59 @@ def calculate_total_time_spent(tasks: list[Task]) -> dict:
         total_time_spent[task.category] += task.time_spent_minutes or 0
 
     return total_time_spent
+
+def generate_weekly_summary(db, weekly_metrics: dict) -> GeneratedWeeklySummary:
+    prompt = """
+        Analyze the provided weekly productivity data.
+
+        Generate:
+        - summary: one concise paragraph describing productivity, workload,
+        completion activity, time distribution, and focus trends.
+        - suggestions: 2-4 specific and actionable suggestions based only on
+        the provided data.
+
+        Rules:
+        - Do not invent activity or context not present in the data.
+        - Do not make assumptions about the user's health, priorities, or goals.
+        - Tasks with the same id represent the same task and must not be double-counted.
+        - A task may appear in relevant_tasks because it was created, started,
+        or completed during the selected week.
+        - Use the aggregate metrics as the source of truth for weekly totals.
+    """
+    client = genai.Client(api_key=os.getenv("GENAI_API_KEY"))
+
+
+    response = client.models.generate_content(
+        model='gemini-flash-latest',
+        contents=[
+            types.Part.from_text(text=prompt),
+            types.Part.from_text(text=json.dumps(weekly_metrics, default=str)),
+        ],    
+        config=types.GenerateContentConfig(
+            response_mime_type="application/json",
+            response_schema=GeneratedWeeklySummary,
+        ),
+    )
+    generated_weekly_summary = GeneratedWeeklySummary.model_validate_json(response.text)
+
+    ## TODO: Persist the generated weekly summary to the database, then just return the persisted summary and suggestions.
+
+    weekly_summary = WeeklySummary(
+        week_start_date=weekly_metrics["week_start_date"].date(),
+        week_end_date=weekly_metrics["week_end_date"].date(),
+        total_tasks_created=weekly_metrics["task_activity"]["created"],
+        total_tasks_started=weekly_metrics["task_activity"]["started"],
+        total_tasks_completed=weekly_metrics["task_activity"]["completed"],
+        total_time_spent_minutes=weekly_metrics["time_spent"]["total"],
+        average_focus_level=weekly_metrics["focus_level_completed_tasks"]["average"],
+        category_distribution=weekly_metrics["category_breakdown"]["task_counts"],
+        weekly_summary_notes=generated_weekly_summary.summary,
+        weekly_summary_suggestions=generated_weekly_summary.suggestions,
+        related_tasks=[
+            task["id"]
+            for task in weekly_metrics["relevant_tasks"]
+        ],
+    )
+
+
+    return save_weekly_summary(db, weekly_summary)

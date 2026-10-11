@@ -21,7 +21,8 @@ class WeeklySummaryResponse(BaseModel):
     category_distribution: dict[str, int]
 
     weekly_summary_notes: str | None
-    weekly_summary_suggestions: str | None
+    weekly_summary_suggestions: list[str] | None
+    related_tasks: list[int]
 
     created_at: datetime
     updated_at: datetime
@@ -29,3 +30,7 @@ class WeeklySummaryResponse(BaseModel):
     model_config = {
         "from_attributes": True
     }
+
+class GeneratedWeeklySummary(BaseModel):
+    summary: str
+    suggestions: list[str]
