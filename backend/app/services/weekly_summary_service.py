@@ -10,19 +10,23 @@ from app.crud.weekly_summary_crud import save_weekly_summary
 from app.schemas.task_schema import TaskResponse
 from app.schemas.weekly_summary_schema import GeneratedWeeklySummary
 from datetime import datetime, timedelta
-
+from app.services.vector_store_service import upsert_weekly_summary_vector
 load_dotenv()
 
 def calc_weekly_metrics(db, week_start_date: datetime):
 
-    ## Normalizing the week start date to be at the start of the day.
+    ## The route passes a date. Accept a string too, then pin the window to midnight.
+    if isinstance(week_start_date, str):
+        week_start_date = datetime.strptime(week_start_date, "%Y-%m-%d")
+    elif not isinstance(week_start_date, datetime):
+        week_start_date = datetime.combine(week_start_date, datetime.min.time())
 
-    week_start_date = datetime.strptime(week_start_date, "%Y-%m-%d").replace(
-    hour=0,
-    minute=0,
-    second=0,
-    microsecond=0,
-)
+    week_start_date = week_start_date.replace(
+        hour=0,
+        minute=0,
+        second=0,
+        microsecond=0,
+    )
     ## Set week end date to be 7 days after start date. Can possibly adjust this later and make weeks be static like Monday-Sunday, that way if a week starts on a Tuesday, the end date is still sunday.
     week_end_date = week_start_date + timedelta(days=6)
     next_week_start_date = week_start_date + timedelta(days=7)
@@ -166,7 +170,7 @@ def calculate_total_time_spent(tasks: list[Task]) -> dict:
 
     return total_time_spent
 
-def generate_weekly_summary(db, weekly_metrics: dict) -> GeneratedWeeklySummary:
+def generate_weekly_summary(db, weekly_metrics: dict) -> WeeklySummary:
     prompt = """
         Analyze the provided weekly productivity data.
 
@@ -200,8 +204,6 @@ def generate_weekly_summary(db, weekly_metrics: dict) -> GeneratedWeeklySummary:
     )
     generated_weekly_summary = GeneratedWeeklySummary.model_validate_json(response.text)
 
-    ## TODO: Persist the generated weekly summary to the database, then just return the persisted summary and suggestions.
-
     weekly_summary = WeeklySummary(
         week_start_date=weekly_metrics["week_start_date"].date(),
         week_end_date=weekly_metrics["week_end_date"].date(),
@@ -220,4 +222,8 @@ def generate_weekly_summary(db, weekly_metrics: dict) -> GeneratedWeeklySummary:
     )
 
 
-    return save_weekly_summary(db, weekly_summary)
+    saved_weekly_summary = save_weekly_summary(db, weekly_summary)
+    ## Upsert the weekly summary to the vector store.
+    upsert_weekly_summary_vector(saved_weekly_summary)
+    print(f"Weekly summary {saved_weekly_summary.id} upserted to vector store.")
+    return saved_weekly_summary
