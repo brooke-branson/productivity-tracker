@@ -29,7 +29,8 @@ def build_weekly_summary_document(weekly_summary: WeeklySummary) -> str:
 
     weekly summary notes: {weekly_summary.weekly_summary_notes}
     weekly summary suggestions: {weekly_summary.weekly_summary_suggestions}
-
+    
+    related tasks: {weekly_summary.related_tasks}
     """ 
 
 def upsert_weekly_summary_vector(weekly_summary: WeeklySummary):
@@ -45,3 +46,22 @@ def upsert_weekly_summary_vector(weekly_summary: WeeklySummary):
             }
         ],
     )
+
+def search_weekly_summaries_vectors(query: str, n_results: int = 3) -> list[dict]:
+    results = collection.query(
+        query_texts=[query],
+        n_results=n_results,
+    )
+
+    matches = []
+
+    # This loop trims all the unnecessary data and only returns the weekly summary id, week start date, week end date, and distance.
+    for metadata, distance in zip(results["metadatas"][0], results["distances"][0]):
+        matches.append({
+            "weekly_summary_id": metadata.get("weekly_summary_id", None),
+            "week_start_date": metadata.get("week_start_date", None),
+            "week_end_date": metadata.get("week_end_date", None),
+            "distance": distance,
+        })
+
+    return matches

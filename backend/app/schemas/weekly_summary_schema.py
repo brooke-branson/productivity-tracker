@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from app.schemas.task_schema import Category, TaskStatus
 from datetime import datetime, date
 
 class WeeklySummaryCreate(BaseModel):
@@ -6,6 +7,11 @@ class WeeklySummaryCreate(BaseModel):
     ## The start date is techincally not needed since we get to define what the start date is, but this allows for easy generation of "historical" data for testing purposes.
     week_start_date: date
 
+class RelatedTaskSnapshot(BaseModel):
+    id: int
+    name: str
+    category: Category
+    status: TaskStatus
 
 class WeeklySummaryResponse(BaseModel):
     id: int
@@ -22,7 +28,7 @@ class WeeklySummaryResponse(BaseModel):
 
     weekly_summary_notes: str | None
     weekly_summary_suggestions: list[str] | None
-    related_tasks: list[int]
+    related_tasks: list[RelatedTaskSnapshot]
 
     created_at: datetime
     updated_at: datetime

@@ -5,11 +5,13 @@ from app.db.session import Session, get_db
 from app.crud.task_crud import create_task, update_task, list_tasks, get_task, del_task
 from app.schemas.task_schema import TaskCreate, TaskUpdate, TaskResponse
 from app.schemas.weekly_summary_schema import WeeklySummaryResponse
+from app.schemas.historical_search_schema import HistoricalSearchResponse
 from app.crud.weekly_summary_crud import get_weekly_summary
 from app.db.base import Base
 from app.db.session import engine
 from datetime import date
-from app.services.weekly_summary_service import generate_weekly_summary, calc_weekly_metrics
+from app.services.weekly_summary_service import generate_weekly_summary, calc_weekly_metrics, get_ranked_weekly_summaries
+from app.services.historical_search_service import answer_historical_search
 # Base.metadata.drop_all(bind=engine) ## TODO: Remove this in production
 Base.metadata.create_all(bind=engine)
 app = FastAPI()
@@ -69,3 +71,12 @@ def get_weekly_summary_endpoint(week_start_date: date, db: Session = Depends(get
         ## This is just placeholder error handling for now. In the future, this would actually work to generate a weekly summary in the background if it didn't exist.
         raise HTTPException(status_code=404, detail="Weekly summary not found")
     return weekly_summary
+
+@app.get("/weekly-summary/search/{query}", response_model=list[WeeklySummaryResponse])
+def search_weekly_summaries_endpoint(query: str, n_results: int = 3, db: Session = Depends(get_db)):
+    results = get_ranked_weekly_summaries(db, query, n_results)
+    return results
+
+@app.get("/historical-search", response_model=HistoricalSearchResponse)
+def answer_historical_search_endpoint(query: str, db: Session = Depends(get_db)):
+    return answer_historical_search(db, query)

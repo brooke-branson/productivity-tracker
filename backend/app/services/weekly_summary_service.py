@@ -8,9 +8,10 @@ from app.db.models.task_model import Task, TaskStatus
 from app.db.models.weekly_summ_model import WeeklySummary
 from app.crud.weekly_summary_crud import save_weekly_summary
 from app.schemas.task_schema import TaskResponse
-from app.schemas.weekly_summary_schema import GeneratedWeeklySummary
+from app.schemas.weekly_summary_schema import GeneratedWeeklySummary, WeeklySummaryResponse
 from datetime import datetime, timedelta
-from app.services.vector_store_service import upsert_weekly_summary_vector
+from app.crud.utilities import get_item
+from app.services.vector_store_service import upsert_weekly_summary_vector, search_weekly_summaries_vectors
 load_dotenv()
 
 def calc_weekly_metrics(db, week_start_date: datetime):
@@ -216,7 +217,12 @@ def generate_weekly_summary(db, weekly_metrics: dict) -> WeeklySummary:
         weekly_summary_notes=generated_weekly_summary.summary,
         weekly_summary_suggestions=generated_weekly_summary.suggestions,
         related_tasks=[
-            task["id"]
+            {
+                "id": task["id"],
+                "name": task["name"],
+                "category": task["category"],
+                "status": task["status"],
+            }
             for task in weekly_metrics["relevant_tasks"]
         ],
     )
@@ -227,3 +233,27 @@ def generate_weekly_summary(db, weekly_metrics: dict) -> WeeklySummary:
     upsert_weekly_summary_vector(saved_weekly_summary)
     print(f"Weekly summary {saved_weekly_summary.id} upserted to vector store.")
     return saved_weekly_summary
+
+def get_weekly_summary_by_id(db, weekly_summary_id: int) -> WeeklySummary:
+    return get_item(db, WeeklySummary, weekly_summary_id, WeeklySummaryResponse)
+
+def get_ranked_weekly_summaries(db, query: str, n_results: int = 3) -> list[WeeklySummary]:
+    results = search_weekly_summaries_vectors(query, n_results)
+
+    summary_ids = [
+        match["weekly_summary_id"] for match in results
+    ]
+
+    summaries = db.scalars(
+        select(WeeklySummary).where(WeeklySummary.id.in_(summary_ids))
+    ).all()
+
+    # This is a dictionary of the summaries by id, so we can easily access the summary by id later.
+    summaries_by_id = {
+        summary.id: summary for summary in summaries
+    }
+
+    # This list comprehension returns the summaries in the order of the summary ids by ranking from the vector store.
+    return [
+        summaries_by_id[summary_id] for summary_id in summary_ids if summary_id in summaries_by_id
+    ]

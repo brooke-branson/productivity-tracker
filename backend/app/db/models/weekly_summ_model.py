@@ -95,7 +95,7 @@ class WeeklySummary(Base):
         nullable=False,
         default=list
         )
-    related_tasks: Mapped[list[int]] = mapped_column(
+    related_tasks: Mapped[list[dict]] = mapped_column(
         JSON,
         nullable=False,
         default=list
