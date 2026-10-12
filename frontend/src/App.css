@@ -101,6 +101,36 @@ h2 {
   padding: 18px;
 }
 
+.weekly-summary {
+  margin: 16px 0;
+}
+
+.summary-suggestions-heading {
+  margin: 18px 0 8px;
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 560;
+  letter-spacing: -0.03em;
+}
+
+.summary-metrics,
+.summary-notes {
+  max-width: 72ch;
+}
+
+.summary-metrics {
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.summary-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 6px;
+}
+
 .panel-head {
   display: flex;
   justify-content: space-between;
@@ -218,13 +248,26 @@ h2 {
   grid-template-columns: minmax(280px, 360px) 1fr;
   gap: 16px;
   margin-top: 16px;
-  align-items: start;
+  align-items: stretch;
 }
 
 .task-form,
 .edit-form {
   display: grid;
   gap: 12px;
+}
+
+.task-form {
+  height: 100%;
+  align-content: start;
+}
+
+.task-form > .primary {
+  margin-top: auto;
+}
+
+.task-board {
+  height: 100%;
 }
 
 label,
@@ -321,11 +364,11 @@ button {
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 10px;
+  gap: 6px;
 }
 
 .task-card {
-  padding: 14px;
+  padding: 8px 10px;
   border-radius: 0 16px 0 16px;
   background: var(--raised);
   border: 1px solid var(--line);
@@ -341,16 +384,16 @@ button {
 
 .task-name {
   font-weight: 600;
-  font-size: 1.05rem;
+  font-size: 0.95rem;
 }
 
 .task-meta,
 .task-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
   align-items: center;
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 .task-actions {
@@ -391,7 +434,21 @@ button {
 .focus-dot.focus-none { background: var(--focus-none); color: white; }
 
 .task-dates {
-  margin-top: 8px;
+  margin-top: 4px;
+  font-size: 0.8rem;
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.pager span {
+  color: var(--muted);
+  font-size: 0.85rem;
 }
 
 .edit-form {
@@ -415,6 +472,10 @@ button {
   .date-inputs {
     display: grid;
     grid-template-columns: 1fr;
+  }
+
+  .workspace {
+    align-items: start;
   }
 
   .stats {

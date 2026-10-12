@@ -3,6 +3,7 @@ import { checkHealth, createTask, deleteTask, getTask, listTasks, updateTask } f
 import TaskBoard from './components/TaskBoard'
 import TaskForm from './components/TaskForm'
 import TrendChart from './components/TrendChart'
+import WeeklySummary from './components/WeeklySummary'
 import { WEEKDAYS, eachDay, formatMinutes, parseDateInput, taskDay, toDateKey, weekDays } from './constants'
 import './App.css'
 
@@ -180,6 +181,11 @@ export default function App() {
         days={chartDays}
         label={chartLabel}
         showAverage={dateFilter.mode === 'weekday'}
+      />
+
+      <WeeklySummary
+        weekStart={dateFilter.mode === 'week' && chartDays[0] ? toDateKey(chartDays[0]) : null}
+        label={dateFilter.mode === 'week' ? chartLabel : 'Week'}
       />
 
       <div className="workspace">

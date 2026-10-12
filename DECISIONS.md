@@ -64,3 +64,10 @@ type-definition work is not necessary for the scope of this project.
 
     Task_crud:
         Main functions are very simple, just pointing toward utilities. The update function is the important one that contains some business logic that validates input data before changing the task object.
+## Summary Decisions:
+    Historical summaries are currently derived from the task eventt timestamps and current task state. The task state is not versioned so generating an older week after a subsequent task changes can produce small differences. Task history and tracking can solve this, but I considered it outside of scope.
+
+    Each weekly summary is generated once, then is fetched from persisted storage if a user wants to look back at the summary for previous weeks.
+
+    Not in scope of this project, but the next big task I would work on is adding scheduled tasks that auto-generate the weekly summary for the previous week (after deciding on monday/sunday as the first day of the week) when the new week starts. So on mondays/sundays, generate the summary for the week that just finished. This makes things feel seamless for the users.
+    

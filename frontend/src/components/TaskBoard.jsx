@@ -23,14 +23,20 @@ function formToPatch(form) {
   }
 }
 
+const PAGE_SIZE = 5
+
 export default function TaskBoard({ tasks, dateFilter, onDateFilter, onSave, onDelete, onOpen }) {
   const [filter, setFilter] = useState('all')
+  const [page, setPage] = useState(0)
   const [editingId, setEditingId] = useState(null)
   const [draft, setDraft] = useState(null)
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
 
   const visible = filter === 'all' ? tasks : tasks.filter((task) => task.status === filter)
+  const pageCount = Math.max(1, Math.ceil(visible.length / PAGE_SIZE))
+  const currentPage = Math.min(page, pageCount - 1)
+  const pageTasks = visible.slice(currentPage * PAGE_SIZE, currentPage * PAGE_SIZE + PAGE_SIZE)
 
   useEffect(() => {
     // Close the editor when the open task is no longer in the selected week.
@@ -39,6 +45,15 @@ export default function TaskBoard({ tasks, dateFilter, onDateFilter, onSave, onD
       setDraft(null)
     }
   }, [tasks, editingId])
+
+  useEffect(() => {
+    // A new date or status view starts on the first page.
+    setPage(0)
+  }, [filter, dateFilter])
+
+  useEffect(() => {
+    setPage((current) => Math.min(current, Math.max(0, pageCount - 1)))
+  }, [pageCount])
 
   async function openEditor(task) {
     setError('')
@@ -129,7 +144,7 @@ export default function TaskBoard({ tasks, dateFilter, onDateFilter, onSave, onD
         <p className="empty-note">No tasks in this view yet.</p>
       ) : (
         <ul className="task-list">
-          {visible.map((task) => {
+          {pageTasks.map((task) => {
             const editing = editingId === task.id
             return (
               <li
@@ -231,6 +246,20 @@ export default function TaskBoard({ tasks, dateFilter, onDateFilter, onSave, onD
             )
           })}
         </ul>
+      )}
+
+      {visible.length > PAGE_SIZE && (
+        <div className="pager">
+          <button type="button" onClick={() => setPage(currentPage - 1)} disabled={currentPage === 0}>
+            Previous
+          </button>
+          <span>
+            {currentPage + 1} / {pageCount}
+          </span>
+          <button type="button" onClick={() => setPage(currentPage + 1)} disabled={currentPage >= pageCount - 1}>
+            Next
+          </button>
+        </div>
       )}
     </section>
   )

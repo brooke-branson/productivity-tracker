@@ -66,3 +66,17 @@ export function updateTask(id, edits) {
 export function deleteTask(id) {
   return request(`/tasks/${id}`, { method: 'DELETE' })
 }
+
+// A missing week is an empty card, not a failed page.
+export async function getWeeklySummary(weekStart) {
+  try {
+    return await request(`/weekly-summary/${weekStart}`)
+  } catch (err) {
+    if (err.message === 'Weekly summary not found') return null
+    throw err
+  }
+}
+
+export function generateWeeklySummary(weekStart) {
+  return request(`/weekly-summary/${weekStart}`, { method: 'POST' })
+}
