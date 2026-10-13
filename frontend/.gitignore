@@ -22,3 +22,19 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local application data
+*.db
+*.sqlite
+*.sqlite3
+backend/chroma_data/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Frontend build/dependencies
+frontend/node_modules/
+frontend/dist/

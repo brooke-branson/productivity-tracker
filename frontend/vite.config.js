@@ -10,6 +10,7 @@ export default defineConfig({
       '/tasks': 'http://127.0.0.1:8000',
       '/healthz': 'http://127.0.0.1:8000',
       '/weekly-summary': 'http://127.0.0.1:8000',
+      '/historical-search': 'http://127.0.0.1:8000',
     },
   },
 })

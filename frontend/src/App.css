@@ -37,22 +37,62 @@ h2 {
   font-size: 1.6rem;
 }
 
-.health {
-  margin: 0;
-  padding: 8px 12px;
-  border-radius: 999px;
-  background: var(--card);
-  border: 1px solid var(--line);
+.ai-search {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.ai-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
   font-size: 0.85rem;
   font-weight: 600;
 }
 
-.health-ok {
-  color: var(--accent);
+.ai-search-icon {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  color: var(--ink);
 }
 
-.health-down {
-  color: var(--danger);
+.ai-search-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.ai-search-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 5;
+  width: min(420px, calc(100vw - 32px));
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 0 16px 0 16px;
+  box-shadow: var(--shadow);
+}
+
+.ai-search-panel .form-error {
+  margin: 0;
+}
+
+.ai-search-answer p {
+  margin: 0;
+}
+
+.ai-search-answer .history-matches {
+  margin-top: 8px;
 }
 
 .banner,
@@ -129,6 +169,12 @@ h2 {
   padding-left: 1.2rem;
   display: grid;
   gap: 6px;
+}
+
+.history-matches {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
 }
 
 .panel-head {
@@ -472,6 +518,16 @@ button {
   .date-inputs {
     display: grid;
     grid-template-columns: 1fr;
+  }
+
+  .ai-search,
+  .ai-search-bar {
+    align-items: flex-start;
+  }
+
+  .ai-search-panel {
+    position: static;
+    width: 100%;
   }
 
   .workspace {

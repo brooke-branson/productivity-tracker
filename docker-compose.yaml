@@ -1,0 +1,23 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: sqlite:////data/productivity_tracker.db
+      GENAI_API_KEY: ${GENAI_API_KEY}
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY}
+    volumes:
+      - sqlite_data:/data
+      - chroma_data:/app/chroma_data
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+volumes:
+  sqlite_data:
+  chroma_data:

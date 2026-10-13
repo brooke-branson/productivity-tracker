@@ -11,7 +11,7 @@ from app.db.base import Base
 from app.db.session import engine
 from datetime import date
 from app.services.weekly_summary_service import generate_weekly_summary, calc_weekly_metrics, get_ranked_weekly_summaries
-from app.services.historical_search_service import answer_historical_search
+from app.services.historical_search_agent import answer_historical_search
 # Base.metadata.drop_all(bind=engine) ## TODO: Remove this in production
 Base.metadata.create_all(bind=engine)
 app = FastAPI()

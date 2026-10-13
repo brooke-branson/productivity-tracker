@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { checkHealth, createTask, deleteTask, getTask, listTasks, updateTask } from './api'
+import { createTask, deleteTask, getTask, listTasks, updateTask } from './api'
 import TaskBoard from './components/TaskBoard'
 import TaskForm from './components/TaskForm'
 import TrendChart from './components/TrendChart'
 import WeeklySummary from './components/WeeklySummary'
+import HistoricalSearch from './components/HistoricalSearch'
 import { WEEKDAYS, eachDay, formatMinutes, parseDateInput, taskDay, toDateKey, weekDays } from './constants'
 import './App.css'
 
@@ -75,7 +76,6 @@ function averageFocus(tasks) {
 
 export default function App() {
   const [tasks, setTasks] = useState([])
-  const [health, setHealth] = useState('checking')
   const [error, setError] = useState('')
   const [saving, setSaving] = useState(false)
   const [dateFilter, setDateFilter] = useState({
@@ -87,19 +87,11 @@ export default function App() {
   })
 
   const refresh = useCallback(async () => {
-    const [healthResult, taskResult] = await Promise.allSettled([checkHealth(), listTasks()])
-
-    if (healthResult.status === 'fulfilled' && healthResult.value?.status === 'ok') {
-      setHealth('ok')
-    } else {
-      setHealth('down')
-    }
-
-    if (taskResult.status === 'fulfilled') {
-      setTasks(taskResult.value)
+    try {
+      setTasks(await listTasks())
       setError('')
-    } else {
-      setError(taskResult.reason.message)
+    } catch (err) {
+      setError(err.message)
     }
   }, [])
 
@@ -150,9 +142,7 @@ export default function App() {
           <p className="eyebrow">Daily log</p>
           <h1>Productivity tracker</h1>
         </div>
-        <p className={`health health-${health}`}>
-          API {health === 'ok' ? 'connected' : health === 'down' ? 'offline' : 'checking'}
-        </p>
+        <HistoricalSearch />
       </header>
 
       {error && <p className="banner">{error}</p>}

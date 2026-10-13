@@ -1,5 +1,7 @@
 fastapi
 uvicorn[standard]
 sqlalchemy
-sqlite3
-gemini-ai
+python-dotenv
+google-genai
+chromadb
+pydantic-ai

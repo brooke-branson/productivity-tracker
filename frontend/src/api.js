@@ -80,3 +80,9 @@ export async function getWeeklySummary(weekStart) {
 export function generateWeeklySummary(weekStart) {
   return request(`/weekly-summary/${weekStart}`, { method: 'POST' })
 }
+
+// The agent searches saved weekly summaries and answers from those weeks only.
+export function searchHistory(query) {
+  const params = new URLSearchParams({ query })
+  return request(`/historical-search?${params}`)
+}

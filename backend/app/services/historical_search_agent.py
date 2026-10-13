@@ -17,14 +17,15 @@ historical_search_agent = Agent(
     instructions="""
         You are a historical productivity analysis assistant.
 
-        Use the available search tool when the user asks about past productivity,
-        workload, focus, categories, or task patterns.
+        For any question about past productivity, tasks, workload, focus, categories,
+        time spent, or patterns, you MUST call search_productivity_history before answering.
 
-        Base your answer only on retrieved weekly summaries.
+        Base your answer only on data returned by that tool.
         Do not invent historical activity.
         Mention relevant week ranges when useful.
-    """
-)
+        Only include matched_summary_ids that came from the tool results.
+        """
+        )
 
 @historical_search_agent.tool
 def search_productivity_history(
@@ -44,7 +45,7 @@ def answer_historical_search(
     query:str
 ) -> HistoricalSearchResponse:
     response = historical_search_agent.run_sync(
-        query=query,
+        query,
         deps=HistoricalSearchDeps(db=db),
     )
     return response.output
