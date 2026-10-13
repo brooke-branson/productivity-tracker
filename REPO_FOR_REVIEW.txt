@@ -1,0 +1,3555 @@
+REPO FOR REVIEW
+Generated: 2026-10-12 14:50:56
+Root: productivity-tracker
+Omitted: node_modules, .venv, .git, __pycache__, chroma_data, dist, .env (secrets), package-lock.json, binaries/images
+File count: 44
+================================================================================
+
+================================================================================
+FILE: .env.example
+================================================================================
+DATABASE_URL=sqlite:///./productivity_tracker.db
+
+# Used by the existing weekly-summary Gemini client
+GENAI_API_KEY=
+
+# Used by Pydantic-AI's Google provider
+GOOGLE_API_KEY=
+
+================================================================================
+FILE: .gitignore
+================================================================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[codz]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+#   Usually these files are written by a python script from a template
+#   before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py.cover
+*.lcov
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+#   For a library or package, you might want to ignore these files since the code is
+#   intended to run in multiple environments; otherwise, check them in:
+# .python-version
+
+# pipenv
+#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
+#   However, in case of collaboration, if having platform-specific dependencies or dependencies
+#   having no cross-platform support, pipenv may install dependencies that don't work, or not
+#   install all needed dependencies.
+# Pipfile.lock
+
+# uv
+#   Similar to Pipfile.lock, it is generally recommended to include uv.lock in version control.
+#   This is especially recommended for binary packages to ensure reproducibility, and is more
+#   commonly ignored for libraries.
+# uv.lock
+
+# poetry
+#   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
+#   This is especially recommended for binary packages to ensure reproducibility, and is more
+#   commonly ignored for libraries.
+#   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
+# poetry.lock
+# poetry.toml
+
+# pdm
+#   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
+#   pdm recommends including project-wide configuration in pdm.toml, but excluding .pdm-python.
+#   https://pdm-project.org/en/latest/usage/project/#working-with-version-control
+# pdm.lock
+# pdm.toml
+.pdm-python
+.pdm-build/
+
+# pixi
+#   Similar to Pipfile.lock, it is generally recommended to include pixi.lock in version control.
+# pixi.lock
+#   Pixi creates a virtual environment in the .pixi directory, just like venv module creates one
+#   in the .venv directory. It is recommended not to include this directory in version control.
+.pixi/*
+!.pixi/config.toml
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule*
+celerybeat.pid
+
+# Redis
+*.rdb
+*.aof
+*.pid
+
+# RabbitMQ
+mnesia/
+rabbitmq/
+rabbitmq-data/
+
+# ActiveMQ
+activemq-data/
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.envrc
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs/Zensical documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# PyCharm
+#   JetBrains specific template is maintained in a separate JetBrains.gitignore that can
+#   be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
+#   and can be added to the global gitignore or merged into this file.  For a more nuclear
+#   option (not recommended) you can uncomment the following to ignore the entire idea folder.
+# .idea/
+
+# Abstra
+#   Abstra is an AI-powered process automation framework.
+#   Ignore directories containing user credentials, local state, and settings.
+#   Learn more at https://abstra.io/docs
+.abstra/
+
+# Visual Studio Code
+#   Visual Studio Code specific template is maintained in a separate VisualStudioCode.gitignore that
+#   can be found at https://github.com/github/gitignore/blob/main/Global/VisualStudioCode.gitignore
+#   and can be added to the global gitignore or merged into this file. However, if you prefer, you
+#   could uncomment the following to ignore the entire vscode folder
+# .vscode/
+# Temporary file for partial code execution
+tempCodeRunnerFile.py
+
+# Ruff stuff:
+.ruff_cache/
+
+# PyPI configuration file
+.pypirc
+
+# Marimo
+marimo/_static/
+marimo/_lsp/
+__marimo__/
+
+# Streamlit
+.streamlit/secrets.toml
+
+================================================================================
+FILE: backend/.dockerignore
+================================================================================
+.venv
+__pycache__
+*.pyc
+.env
+*.db
+chroma_data
+.pytest_cache
+
+================================================================================
+FILE: backend/.env.example
+================================================================================
+DATABASE_URL=sqlite:///./productivity_tracker.db
+
+# Used by the existing weekly-summary Gemini client
+GENAI_API_KEY=
+
+# Used by Pydantic-AI's Google provider
+GOOGLE_API_KEY=
+
+================================================================================
+FILE: backend/app/crud/task_crud.py
+================================================================================
+from app.db.models.task_model import Task, TaskStatus
+from app.crud.utilities import add_item, remove_item, get_item
+
+from app.schemas.task_schema import TaskCreate, TaskResponse, TaskUpdate
+
+from sqlalchemy import select
+from sqlalchemy.sql import func
+"""
+    All of the CRUD operations for the Task model. 
+
+    Design choice to break each model into its own file, and the crud operations that can be shared across models into their own file.
+"""
+
+def create_task(db, task_create: TaskCreate) -> Task:
+    task = Task(
+        name=task_create.name,
+    )
+
+    return add_item(db, task)
+
+def del_task(db, id: int) -> TaskResponse | None:
+    deleted_task = remove_item(db, Task, id, TaskResponse)
+
+    return deleted_task
+
+def get_task(db, id: int) -> TaskResponse | None:
+    return get_item(db, Task, id, TaskResponse)
+
+def update_task(db, id: int, edits: TaskUpdate):
+    existing_task = db.scalar(
+        select(Task).where(Task.id == id)
+    )
+    if not existing_task:
+        return None
+    edit_data = edits.model_dump(exclude_unset=True)
+    
+    ## Actual business logic starts here, validating the edits before the task is updated.
+    proposed_status = edit_data.get("status", existing_task.status)
+    proposed_time = edit_data.get("time_spent_minutes", existing_task.time_spent_minutes)
+    proposed_focus = edit_data.get("focus_level", existing_task.focus_level)
+
+    ## This block is here to validate focus and time if the edit is to complete the task. 
+    if proposed_status == TaskStatus.COMPLETED:
+        ## The time must be greater than 0 for proper tracking, it's not realistic to have a task with no time spent.
+        ## This rule is up to interpretation though, in the event a user forgot to add a task in the past and wants it tracked now, but can discuss this later.
+        if proposed_time is None or proposed_time <= 0:
+            raise ValueError("Time spent must be greater than 0 when completing a task")
+
+        ## Same as the time, a focus level is required when completing a task.
+        if proposed_focus is None:
+            raise ValueError("Focus is required when completing a task")
+
+    
+    for k, v in edit_data.items():
+        setattr(existing_task, k, v)
+    
+    if (
+        proposed_status == TaskStatus.IN_PROGRESS
+        and existing_task.started_at is None
+    ):
+        ## If the task is being started, and it hasn't been started yet, set the started_at time to the current time.
+        existing_task.started_at = func.now()
+
+    if (
+        proposed_status == TaskStatus.COMPLETED
+        and existing_task.completed_at is None
+    ):
+        ## If the task is being completed, and the complete time has not been set yet, set the completed_at time to the current time.
+        ## There is an edge case here to discuss where task is set to completed but it was never set to in progress. First thing that comes to mind is to set the started_at time to the current time if it hasn't been set yet.
+        existing_task.completed_at = func.now()
+    
+    try:
+        db.commit()
+        db.refresh(existing_task)
+
+        return existing_task
+
+    except Exception:
+        db.rollback()
+        raise
+
+def list_tasks(db) -> list[Task]:
+    tasks = db.scalars(
+        select(Task).order_by(Task.created_at.desc())
+    ).all()
+
+
+    return tasks
+
+## TODO: Add additional fetching options to list tasks by various filters, such as status, focus level, time spent, etc...
+
+================================================================================
+FILE: backend/app/crud/utilities.py
+================================================================================
+from sqlalchemy import select
+
+
+def add_item(db, model):
+    try:
+        db.add(model)
+        db.commit()
+        db.refresh(model)
+
+        return model
+
+    except Exception:
+        db.rollback()
+        raise
+
+def remove_item(db, model, id, response_model=None):
+    existing_item = db.scalar(select(model).where(model.id == id))
+
+    if not existing_item:
+        return None
+
+    deleted_item = response_model.model_validate(existing_item) if response_model else existing_item
+
+    try:
+        db.delete(existing_item)
+        db.commit()
+
+        return deleted_item
+    except Exception:
+        db.rollback()
+        raise
+    
+def get_item(db, model, id, response_model=None):
+    item = db.scalar(select(model).where(model.id == id))
+
+    if not item:
+        return None
+
+    if response_model:
+        return response_model.model_validate(item)
+    else:
+        return item
+
+================================================================================
+FILE: backend/app/crud/weekly_summary_crud.py
+================================================================================
+from app.crud.utilities import add_item, remove_item, get_item
+
+from sqlalchemy import select
+from sqlalchemy.sql import func
+from typing import Optional
+from datetime import date, timedelta
+from app.db.models.weekly_summ_model import WeeklySummary
+
+def save_weekly_summary(db, weekly_summary: WeeklySummary) -> WeeklySummary:
+    existing_weekly_summary = db.scalar(select(WeeklySummary).where(WeeklySummary.week_start_date == weekly_summary.week_start_date))
+
+    if existing_weekly_summary:
+        existing_weekly_summary.week_end_date = weekly_summary.week_end_date
+        existing_weekly_summary.total_tasks_created = weekly_summary.total_tasks_created
+        existing_weekly_summary.total_tasks_started = weekly_summary.total_tasks_started
+        existing_weekly_summary.total_tasks_completed = weekly_summary.total_tasks_completed
+        existing_weekly_summary.total_time_spent_minutes = weekly_summary.total_time_spent_minutes
+        existing_weekly_summary.average_focus_level = weekly_summary.average_focus_level
+        existing_weekly_summary.category_distribution = weekly_summary.category_distribution
+        existing_weekly_summary.weekly_summary_notes = weekly_summary.weekly_summary_notes
+        existing_weekly_summary.weekly_summary_suggestions = weekly_summary.weekly_summary_suggestions
+        existing_weekly_summary.related_tasks = weekly_summary.related_tasks
+
+        db.commit()
+        db.refresh(existing_weekly_summary)
+
+        return existing_weekly_summary
+    else:
+        return add_item(db, weekly_summary) 
+
+def get_weekly_summary(db, requested_date: date) -> Optional[WeeklySummary]:
+    return db.scalar(select(WeeklySummary).where(
+        WeeklySummary.week_start_date <= requested_date,
+         WeeklySummary.week_end_date >= requested_date
+         )
+         )
+
+================================================================================
+FILE: backend/app/db/base.py
+================================================================================
+from sqlalchemy.orm import DeclarativeBase
+
+class Base(DeclarativeBase):
+    pass
+
+================================================================================
+FILE: backend/app/db/models/__init__.py
+================================================================================
+
+
+================================================================================
+FILE: backend/app/db/models/task_model.py
+================================================================================
+from datetime import datetime
+from enum import Enum
+
+from sqlalchemy import DateTime, String, func, Integer
+from sqlalchemy.orm import Mapped, mapped_column
+
+from app.db.base import Base
+
+
+## Went ahead and defined some initial task statuses ahead, open to change based on feedback.
+class TaskStatus(str, Enum):
+    PLANNED = "planned"
+    IN_PROGRESS = "in-progress"
+    COMPLETED = "completed"
+
+class Category(str, Enum):
+    PERSONAL = "personal"
+    WORK = "work"
+    LEARNING = "learning"
+    FITNESS = "fitness"
+    OTHER = "other"
+    UNCATEGORIZED = "uncategorized"
+
+class FocusLevel(int, Enum):
+    VERY_LOW = 1
+    LOW = 2
+    MEDIUM = 3
+    HIGH = 4
+    VERY_HIGH = 5
+
+class Task(Base):
+    """Model for the task table.
+
+        Fields:
+        - id: int
+        - name: str
+        - category: str
+        - status: str
+        - time_spent_minutes: int | None
+        - focus_level: int | None
+        - created_at: datetime
+        - started_at: datetime | None
+        - updated_at: datetime
+        - completed_at: datetime | None
+
+    """
+    __tablename__ = "tasks"
+
+    id: Mapped[int] = mapped_column(
+        Integer,
+        primary_key=True,
+        autoincrement=True,
+     )
+
+    name: Mapped[str] = mapped_column(
+        String(255),
+        nullable=False,
+        )
+
+    category: Mapped[str] = mapped_column(
+        String(255),
+        nullable=False, 
+        default=Category.UNCATEGORIZED.value ## Defaulting to uncategorized as the initial value, and can be updated when task is completed or whenever user want to change.
+        )
+
+    status: Mapped[str] = mapped_column(
+        String(20),
+        nullable=False,
+        default=TaskStatus.PLANNED.value ## Similar to the category, I set the default value to the planned enum, but this is open to change based on feedback.
+        )
+
+    time_spent_minutes: Mapped[int | None] = mapped_column(
+        Integer,
+        nullable=True,
+        )
+
+    focus_level: Mapped[int | None] = mapped_column(
+        Integer,
+        nullable=True
+    )
+
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime,
+        default=func.now(),
+        nullable=False
+    )
+
+    started_at: Mapped[datetime | None] = mapped_column(
+        DateTime,
+        nullable=True
+    )
+
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime,
+        default=func.now(),
+        nullable=False,
+        onupdate=func.now()
+    )
+
+    completed_at: Mapped[datetime | None] = mapped_column(
+        DateTime,
+        nullable=True
+    )
+
+================================================================================
+FILE: backend/app/db/models/weekly_summ_model.py
+================================================================================
+from datetime import datetime, date
+
+from sqlalchemy import DateTime, Integer, func, JSON, Date, Text, Float
+from sqlalchemy.orm import Mapped, mapped_column
+
+from app.db.base import Base
+
+class WeeklySummary(Base):
+    """
+    Model for the weekly_summaries table.
+
+    Fields:
+    - id: int
+
+    - week_start_date: date
+    - week_end_date: date
+
+    - total_tasks_created: int
+    - total_tasks_completed: int
+    - total_tasks_started: int
+    
+    - total_time_spent_minutes: int
+    - average_focus_level: float | None
+    - category_distribution: dict[str, int]
+
+    - weekly_summary_notes: str | None
+    - weekly_summary_suggestions: list[str]
+    - related_tasks: list[int]
+
+    - created_at: datetime
+    - updated_at: datetime
+
+    """
+
+    __tablename__ = "weekly_summaries"
+
+    id: Mapped[int] = mapped_column(
+        Integer,
+        primary_key=True
+        )
+    
+    week_start_date: Mapped[date] = mapped_column(
+        Date,
+        nullable=False,
+        unique=True
+        )
+    
+    week_end_date: Mapped[date] = mapped_column(
+        Date,
+        nullable=False
+        )
+
+    total_tasks_created: Mapped[int] = mapped_column(
+        Integer,
+        nullable=False,
+        default=0
+        )
+    
+    total_tasks_completed: Mapped[int] = mapped_column(
+        Integer,
+        nullable=False,
+        default=0
+        )
+    
+    total_tasks_started: Mapped[int] = mapped_column(
+        Integer,
+        nullable=False,
+        default=0
+        )
+
+    total_time_spent_minutes: Mapped[int] = mapped_column(
+        Integer,
+        nullable=False,
+        default=0
+        )
+    
+    average_focus_level: Mapped[float | None] = mapped_column(
+        Float,
+        nullable=True ## Allows for null values if no focus level is set for the week, for any reason, maybe user didn't do anything that week, they just started using the platform, etc...
+        )
+    
+    category_distribution: Mapped[dict[str, int]] = mapped_column(
+        JSON,
+        nullable=False,
+        default=dict
+        )
+    
+    weekly_summary_notes: Mapped[str | None] = mapped_column(
+        Text,
+        nullable=True
+        )
+
+    weekly_summary_suggestions: Mapped[list[str]] = mapped_column(
+        JSON,
+        nullable=False,
+        default=list
+        )
+    related_tasks: Mapped[list[dict]] = mapped_column(
+        JSON,
+        nullable=False,
+        default=list
+        )
+    
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime,
+        default=func.now(),
+        nullable=False
+        )
+    
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime,
+        default=func.now(),
+        nullable=False,
+        onupdate=func.now()
+        )
+
+================================================================================
+FILE: backend/app/db/session.py
+================================================================================
+import os
+
+from dotenv import load_dotenv
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+from collections.abc import Generator
+from sqlalchemy.orm import Session
+
+load_dotenv()
+
+DATABASE_URL = os.environ["DATABASE_URL"]
+
+engine = create_engine(
+    DATABASE_URL,
+    pool_pre_ping=True,
+    connect_args={"check_same_thread": False},
+)
+
+SessionLocal = sessionmaker(
+    bind=engine,
+    autoflush=False,
+    autocommit=False,
+)
+
+def get_db() -> Generator[Session, None, None]:
+    db = SessionLocal()
+
+    try:
+        yield db
+    finally:
+        db.close()
+
+================================================================================
+FILE: backend/app/main.py
+================================================================================
+from fastapi import FastAPI, Depends
+from fastapi.exceptions import HTTPException
+
+from app.db.session import Session, get_db
+from app.crud.task_crud import create_task, update_task, list_tasks, get_task, del_task
+from app.schemas.task_schema import TaskCreate, TaskUpdate, TaskResponse
+from app.schemas.weekly_summary_schema import WeeklySummaryResponse
+from app.schemas.historical_search_schema import HistoricalSearchResponse
+from app.crud.weekly_summary_crud import get_weekly_summary
+from app.db.base import Base
+from app.db.session import engine
+from datetime import date
+from app.services.weekly_summary_service import generate_weekly_summary, calc_weekly_metrics, get_ranked_weekly_summaries
+from app.services.historical_search_agent import answer_historical_search
+# Base.metadata.drop_all(bind=engine) ## TODO: Remove this in production
+Base.metadata.create_all(bind=engine)
+app = FastAPI()
+
+@app.get("/healthz")
+def health_check():
+    return {"status": "ok"}
+
+## CRUD endpoints for the Task model.
+@app.post("/tasks", response_model=TaskResponse)
+def create_task_endpoint(task_create: TaskCreate, db: Session = Depends(get_db)):
+    task = create_task(db, task_create)
+    if not task:
+        raise HTTPException(status_code=400, detail="Failed to create task")
+    return task
+
+@app.patch("/tasks/{task_id}", response_model=TaskResponse)
+def update_task_endpoint(task_id: int, task_update: TaskUpdate, db: Session = Depends(get_db)):
+    task = update_task(db, task_id, task_update)
+    if not task:
+        raise HTTPException(status_code=400, detail="Failed to update task")
+    return task
+
+@app.get("/tasks", response_model=list[TaskResponse])
+def list_tasks_endpoint(db: Session = Depends(get_db)):
+    tasks = list_tasks(db)
+    return tasks
+
+@app.get("/tasks/{task_id}", response_model=TaskResponse)
+def get_task_endpoint(task_id: int, db: Session = Depends(get_db)):
+    task = get_task(db, task_id)
+    if not task:
+        raise HTTPException(status_code=404, detail="Task not found")
+    return task
+
+@app.delete("/tasks/{task_id}", response_model=TaskResponse)
+def delete_task_endpoint(task_id: int, db: Session = Depends(get_db)):
+    task = del_task(db, task_id)
+    if not task:
+        raise HTTPException(status_code=404, detail="Task not found")
+    return task
+
+## End of CRUD endpoints for the Task model.
+
+## Weekly summary endpoint.
+@app.post("/weekly-summary/{week_start_date}", response_model=WeeklySummaryResponse)
+def generate_weekly_summary_endpoint(week_start_date: date, db: Session = Depends(get_db)):
+    ## TODO: Check if weekly summary already exists for the week, if it does, return it.
+    ## TODO: Format the week_start_date to be alyways send to the beginning of the week. For example, if the week_start_date is 2026-10-10, the beginning of the week is 2026-10-05. Still deciding on what will be the first day of the week, likely sunday or monday.
+    weekly_metrics = calc_weekly_metrics(db, week_start_date)
+    return generate_weekly_summary(db, weekly_metrics)
+
+@app.get("/weekly-summary/{week_start_date}", response_model=WeeklySummaryResponse)
+def get_weekly_summary_endpoint(week_start_date: date, db: Session = Depends(get_db)):
+    weekly_summary = get_weekly_summary(db, week_start_date)
+    if not weekly_summary:
+        ## This is just placeholder error handling for now. In the future, this would actually work to generate a weekly summary in the background if it didn't exist.
+        raise HTTPException(status_code=404, detail="Weekly summary not found")
+    return weekly_summary
+
+@app.get("/weekly-summary/search/{query}", response_model=list[WeeklySummaryResponse])
+def search_weekly_summaries_endpoint(query: str, n_results: int = 3, db: Session = Depends(get_db)):
+    results = get_ranked_weekly_summaries(db, query, n_results)
+    return results
+
+@app.get("/historical-search", response_model=HistoricalSearchResponse)
+def answer_historical_search_endpoint(query: str, db: Session = Depends(get_db)):
+    return answer_historical_search(db, query)
+
+================================================================================
+FILE: backend/app/schemas/historical_search_schema.py
+================================================================================
+from pydantic import BaseModel
+
+class HistoricalSearchResponse(BaseModel):
+    answer: str
+    matched_summary_ids: list[int]
+
+================================================================================
+FILE: backend/app/schemas/task_schema.py
+================================================================================
+from pydantic import BaseModel, Field
+from datetime import datetime
+
+from app.db.models.task_model import Category, FocusLevel, TaskStatus
+
+class TaskCreate(BaseModel):
+    name: str = Field(default=None,min_length=3, max_length=255)
+
+
+class TaskUpdate(BaseModel):
+    name: str | None = None
+    category: Category | None = None
+    status: TaskStatus | None = None
+    time_spent_minutes: int | None = Field(default=None, ge=0)
+    focus_level: FocusLevel | None = None
+    started_at: datetime | None = None
+
+class TaskResponse(BaseModel):
+    id: int
+    name: str
+    category: Category
+    status: TaskStatus
+    time_spent_minutes: int | None
+    focus_level: FocusLevel | None
+    created_at: datetime
+    started_at: datetime | None
+    updated_at: datetime
+    completed_at: datetime | None
+
+    model_config = {
+        "from_attributes": True
+    }
+
+================================================================================
+FILE: backend/app/schemas/weekly_summary_schema.py
+================================================================================
+from pydantic import BaseModel
+from app.schemas.task_schema import Category, TaskStatus
+from datetime import datetime, date
+
+class WeeklySummaryCreate(BaseModel):
+    ## Kept create very small and simple here, as backend will handle the rest of the logic. No need to expose to front end unless needed.
+    ## The start date is techincally not needed since we get to define what the start date is, but this allows for easy generation of "historical" data for testing purposes.
+    week_start_date: date
+
+class RelatedTaskSnapshot(BaseModel):
+    id: int
+    name: str
+    category: Category
+    status: TaskStatus
+
+class WeeklySummaryResponse(BaseModel):
+    id: int
+
+    week_start_date: date
+    week_end_date: date
+
+    total_tasks_created: int
+    total_tasks_completed: int
+    total_tasks_started: int
+    total_time_spent_minutes: int
+    average_focus_level: float | None
+    category_distribution: dict[str, int]
+
+    weekly_summary_notes: str | None
+    weekly_summary_suggestions: list[str] | None
+    related_tasks: list[RelatedTaskSnapshot]
+
+    created_at: datetime
+    updated_at: datetime
+
+    model_config = {
+        "from_attributes": True
+    }
+
+class GeneratedWeeklySummary(BaseModel):
+    summary: str
+    suggestions: list[str]
+
+================================================================================
+FILE: backend/app/services/historical_search_agent.py
+================================================================================
+from dataclasses import dataclass
+from sqlalchemy.orm import Session
+
+from pydantic_ai import Agent, RunContext
+from app.schemas.historical_search_schema import HistoricalSearchResponse
+from app.schemas.weekly_summary_schema import WeeklySummaryResponse
+from app.services.weekly_summary_service import get_ranked_weekly_summaries
+
+@dataclass
+class HistoricalSearchDeps:
+    db: Session
+
+historical_search_agent = Agent(
+    "google:gemini-flash-latest",
+    deps_type=HistoricalSearchDeps,
+    output_type=HistoricalSearchResponse,
+    instructions="""
+        You are a historical productivity analysis assistant.
+
+        For any question about past productivity, tasks, workload, focus, categories,
+        time spent, or patterns, you MUST call search_productivity_history before answering.
+
+        Base your answer only on data returned by that tool.
+        Do not invent historical activity.
+        Mention relevant week ranges when useful.
+        Only include matched_summary_ids that came from the tool results.
+        """
+        )
+
+@historical_search_agent.tool
+def search_productivity_history(
+    ctx: RunContext[HistoricalSearchDeps],
+    query: str,
+    n_results: int = 3,
+    ) -> list[WeeklySummaryResponse]:
+
+    summaries = get_ranked_weekly_summaries(ctx.deps.db, query, n_results)
+
+    return [
+        WeeklySummaryResponse.model_validate(summary) for summary in summaries
+    ]
+
+def answer_historical_search(
+    db: Session,
+    query:str
+) -> HistoricalSearchResponse:
+    response = historical_search_agent.run_sync(
+        query,
+        deps=HistoricalSearchDeps(db=db),
+    )
+    return response.output
+
+================================================================================
+FILE: backend/app/services/historical_search_service.py
+================================================================================
+from google import genai
+from google.genai import types
+from app.services.weekly_summary_service import get_ranked_weekly_summaries
+from app.schemas.weekly_summary_schema import WeeklySummaryResponse
+from app.schemas.historical_search_schema import HistoricalSearchResponse
+from dotenv import load_dotenv
+import os
+import json
+load_dotenv()
+
+def answer_historical_search(db,query: str , n_results: int = 3) -> HistoricalSearchResponse:
+    results = get_ranked_weekly_summaries(db, query, n_results)
+
+    summary_context = [
+        WeeklySummaryResponse.model_validate(summary).model_dump(
+            mode="json",
+            exclude={"created_at", "updated_at"},
+        ) for summary in results
+    ]
+
+    client = genai.Client(api_key=os.getenv("GENAI_API_KEY"))
+
+
+    prompt = """
+        Answer the user's historical productivity question using only the
+        retrieved weekly summaries.
+
+        Rules:
+        - Use only the provided weekly summaries.
+        - Do not invent activity or trends that are not supported by the data.
+        - Treat the summaries as ranked by semantic relevance, with the first
+        summary being the strongest match.
+        - Mention relevant week date ranges when useful.
+        - If the retrieved summaries do not support the question, say so.
+        - matched_summary_ids must only contain ids from the provided weekly summaries.
+        """
+
+    contents = [
+        types.Part.from_text(text=prompt),
+        types.Part.from_text(text=json.dumps(summary_context, default=str)),
+        types.Part.from_text(text=f"User question: {query}"),
+    ]
+
+    response = client.models.generate_content(
+        model="gemini-flash-latest",
+        contents=contents,
+        config=types.GenerateContentConfig(
+            response_mime_type="application/json",
+            response_schema=HistoricalSearchResponse,
+        ),
+    )
+
+    historical_search_response = HistoricalSearchResponse.model_validate_json(response.text)
+
+    return historical_search_response
+
+================================================================================
+FILE: backend/app/services/vector_store_service.py
+================================================================================
+import chromadb
+from app.db.models.weekly_summ_model import WeeklySummary
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parents[2]
+CHROMA_PATH = BASE_DIR / "chroma_data"
+
+client = chromadb.PersistentClient(
+    path=str(CHROMA_PATH)
+)
+
+collection = client.get_or_create_collection(name="weekly_summaries")
+
+
+def build_weekly_summary_document(weekly_summary: WeeklySummary) -> str:
+
+    return f"""
+    week: {weekly_summary.week_start_date} to {weekly_summary.week_end_date}
+
+    tasks created: {weekly_summary.total_tasks_created}
+    tasks started: {weekly_summary.total_tasks_started}
+    tasks completed: {weekly_summary.total_tasks_completed}
+
+    total time spent: {weekly_summary.total_time_spent_minutes} minutes
+    average focus level: {weekly_summary.average_focus_level}
+
+    category distribution: 
+    {weekly_summary.category_distribution}
+
+    weekly summary notes: {weekly_summary.weekly_summary_notes}
+    weekly summary suggestions: {weekly_summary.weekly_summary_suggestions}
+    
+    related tasks: {weekly_summary.related_tasks}
+    """ 
+
+def upsert_weekly_summary_vector(weekly_summary: WeeklySummary):
+    document = build_weekly_summary_document(weekly_summary)
+    collection.upsert(
+        ids=[f"weekly-summary-{weekly_summary.id}"],
+        documents=[document],
+        metadatas=[
+            {
+                "weekly_summary_id": weekly_summary.id,
+                "week_start_date": str(weekly_summary.week_start_date),
+                "week_end_date": str(weekly_summary.week_end_date),
+            }
+        ],
+    )
+
+def search_weekly_summaries_vectors(query: str, n_results: int = 3) -> list[dict]:
+    results = collection.query(
+        query_texts=[query],
+        n_results=n_results,
+    )
+
+    matches = []
+
+    # This loop trims all the unnecessary data and only returns the weekly summary id, week start date, week end date, and distance.
+    for metadata, distance in zip(results["metadatas"][0], results["distances"][0]):
+        matches.append({
+            "weekly_summary_id": metadata.get("weekly_summary_id", None),
+            "week_start_date": metadata.get("week_start_date", None),
+            "week_end_date": metadata.get("week_end_date", None),
+            "distance": distance,
+        })
+
+    return matches
+
+================================================================================
+FILE: backend/app/services/weekly_summary_service.py
+================================================================================
+from sqlalchemy import select
+from google import genai
+from google.genai import types
+import os
+import json
+from dotenv import load_dotenv
+from app.db.models.task_model import Task, TaskStatus
+from app.db.models.weekly_summ_model import WeeklySummary
+from app.crud.weekly_summary_crud import save_weekly_summary
+from app.schemas.task_schema import TaskResponse
+from app.schemas.weekly_summary_schema import GeneratedWeeklySummary, WeeklySummaryResponse
+from datetime import datetime, timedelta
+from app.crud.utilities import get_item
+from app.services.vector_store_service import upsert_weekly_summary_vector, search_weekly_summaries_vectors
+load_dotenv()
+
+def calc_weekly_metrics(db, week_start_date: datetime):
+
+    ## The route passes a date. Accept a string too, then pin the window to midnight.
+    if isinstance(week_start_date, str):
+        week_start_date = datetime.strptime(week_start_date, "%Y-%m-%d")
+    elif not isinstance(week_start_date, datetime):
+        week_start_date = datetime.combine(week_start_date, datetime.min.time())
+
+    week_start_date = week_start_date.replace(
+        hour=0,
+        minute=0,
+        second=0,
+        microsecond=0,
+    )
+    ## Set week end date to be 7 days after start date. Can possibly adjust this later and make weeks be static like Monday-Sunday, that way if a week starts on a Tuesday, the end date is still sunday.
+    week_end_date = week_start_date + timedelta(days=6)
+    next_week_start_date = week_start_date + timedelta(days=7)
+
+    ## Get all tasks created between start and end date. < next_week_start_date because we want to include the tasks created on the end date, so setting the end date to be the next week start date is exclusive, leaving retrived tasks only in the questioned week.
+    created_tasks = db.scalars(
+        select(Task).where(Task.created_at >= week_start_date, Task.created_at < next_week_start_date)
+    ).all()
+
+    ## There is a small edge case here where started_tasks will only contribute time to tasks started during the week provided, however completed tasks can have time overlapping into the next week. If a task was started 2 weeks ago and has had time dedicated to it, but was completed this week with additional time added, the time will be counted for the previous week. This can be fixed with some sort of versioning system or tracking the time spent on a task across multiple weeks, but I don't think that is in scope right now and will accept that tradeoff.
+    started_tasks = db.scalars(
+        select(Task).where(Task.started_at >= week_start_date, Task.started_at < next_week_start_date)
+    ).all()
+
+    completed_tasks = db.scalars(
+        select(Task).where(Task.completed_at >= week_start_date, Task.completed_at < next_week_start_date)
+    ).all()
+
+    active_in_progress_tasks = [
+        task
+        for task in started_tasks
+        if task.status == TaskStatus.IN_PROGRESS
+    ]
+
+    worked_tasks = active_in_progress_tasks + completed_tasks
+
+    ## Calculate total tasks created, started (meaning set to in-progress), and completed.
+    total_tasks_created = len(created_tasks)
+    total_tasks_started = len(started_tasks)
+    total_tasks_completed = len(completed_tasks)
+
+    serialized_tasks = serialize_tasks(started_tasks + completed_tasks + created_tasks)
+
+
+    time_spent_in_prog = sum(task.time_spent_minutes for task in started_tasks if task.time_spent_minutes and task.status == TaskStatus.IN_PROGRESS)
+    time_spent_completed = sum(task.time_spent_minutes for task in completed_tasks if task.time_spent_minutes and task.status == TaskStatus.COMPLETED)
+    total_time_spent_minutes = time_spent_in_prog + time_spent_completed
+
+
+    focus_levels = [
+        task.focus_level for task in completed_tasks if task.focus_level is not None
+    ]
+    total_focus_level = sum(focus_levels)
+    average_focus_level = total_focus_level / len(focus_levels) if focus_levels else None
+
+    return {
+        "week_start_date": week_start_date,
+        "week_end_date": week_end_date,
+        "task_activity": {
+            "created": total_tasks_created,
+            "started": total_tasks_started,
+            "completed": total_tasks_completed,
+        },
+        "time_spent": {
+            "in_progress": time_spent_in_prog,
+            "completed": time_spent_completed,
+            "total": total_time_spent_minutes,
+        },
+        "focus_level_completed_tasks": {
+            "average": average_focus_level,
+        },
+        "category_breakdown": {
+            "task_counts": calculate_category_breakdown(worked_tasks),
+            "avg_completed_focus_level": calculate_avg_focus_level(completed_tasks),
+            "total_time_spent": calculate_total_time_spent(worked_tasks),
+        },
+        "relevant_tasks": serialized_tasks,
+
+    }
+
+def serialize_tasks(tasks: list[Task]) -> list[dict]:
+    unique_tasks = {
+        task.id: task
+        for task in tasks
+    }.values()
+
+    serialized_tasks = [
+    TaskResponse.model_validate(task).model_dump(
+        mode="json",
+        exclude={"created_at", "updated_at"},
+    )
+    for task in unique_tasks
+]
+
+    return serialized_tasks
+
+def calculate_category_breakdown(tasks: list[Task]) -> dict:
+    category_breakdown = {
+            "work": 0,
+            "learning": 0,
+            "personal": 0,
+            "fitness": 0,
+            "other": 0,
+            "uncategorized": 0,
+        }
+
+    for task in tasks:
+        category_breakdown[task.category] += 1
+
+    return category_breakdown
+
+def calculate_avg_focus_level(tasks: list[Task]) -> dict:
+    avg_focus_level_count = {
+        "work": [0,0],
+        "learning": [0,0],
+        "personal": [0,0],
+        "fitness": [0,0],
+        "other": [0,0],
+        "uncategorized": [0,0],
+    }
+    for task in tasks:
+        if task.focus_level is None:
+            continue
+
+        avg_focus_level_count[task.category][0] += task.focus_level
+        avg_focus_level_count[task.category][1] += 1
+
+    avg_focus_level = {}
+
+    for category, values in avg_focus_level_count.items():
+        total_focus, count = values
+
+        avg_focus_level[category] = (
+            total_focus / count
+            if count > 0
+            else None
+        )
+    return avg_focus_level
+
+def calculate_total_time_spent(tasks: list[Task]) -> dict:
+    total_time_spent = {
+        "work": 0,
+        "learning": 0,
+        "personal": 0,
+        "fitness": 0,
+        "other": 0,
+        "uncategorized": 0,
+    }
+    for task in tasks:
+        total_time_spent[task.category] += task.time_spent_minutes or 0
+
+    return total_time_spent
+
+def generate_weekly_summary(db, weekly_metrics: dict) -> WeeklySummary:
+    prompt = """
+        Analyze the provided weekly productivity data.
+
+        Generate:
+        - summary: one concise paragraph describing productivity, workload,
+        completion activity, time distribution, and focus trends.
+        - suggestions: 2-4 specific and actionable suggestions based only on
+        the provided data.
+
+        Rules:
+        - Do not invent activity or context not present in the data.
+        - Do not make assumptions about the user's health, priorities, or goals.
+        - Tasks with the same id represent the same task and must not be double-counted.
+        - A task may appear in relevant_tasks because it was created, started,
+        or completed during the selected week.
+        - Use the aggregate metrics as the source of truth for weekly totals.
+    """
+    client = genai.Client(api_key=os.getenv("GENAI_API_KEY"))
+
+
+    response = client.models.generate_content(
+        model='gemini-flash-latest',
+        contents=[
+            types.Part.from_text(text=prompt),
+            types.Part.from_text(text=json.dumps(weekly_metrics, default=str)),
+        ],    
+        config=types.GenerateContentConfig(
+            response_mime_type="application/json",
+            response_schema=GeneratedWeeklySummary,
+        ),
+    )
+    generated_weekly_summary = GeneratedWeeklySummary.model_validate_json(response.text)
+
+    weekly_summary = WeeklySummary(
+        week_start_date=weekly_metrics["week_start_date"].date(),
+        week_end_date=weekly_metrics["week_end_date"].date(),
+        total_tasks_created=weekly_metrics["task_activity"]["created"],
+        total_tasks_started=weekly_metrics["task_activity"]["started"],
+        total_tasks_completed=weekly_metrics["task_activity"]["completed"],
+        total_time_spent_minutes=weekly_metrics["time_spent"]["total"],
+        average_focus_level=weekly_metrics["focus_level_completed_tasks"]["average"],
+        category_distribution=weekly_metrics["category_breakdown"]["task_counts"],
+        weekly_summary_notes=generated_weekly_summary.summary,
+        weekly_summary_suggestions=generated_weekly_summary.suggestions,
+        related_tasks=[
+            {
+                "id": task["id"],
+                "name": task["name"],
+                "category": task["category"],
+                "status": task["status"],
+            }
+            for task in weekly_metrics["relevant_tasks"]
+        ],
+    )
+
+
+    saved_weekly_summary = save_weekly_summary(db, weekly_summary)
+    ## Upsert the weekly summary to the vector store.
+    upsert_weekly_summary_vector(saved_weekly_summary)
+    print(f"Weekly summary {saved_weekly_summary.id} upserted to vector store.")
+    return saved_weekly_summary
+
+def get_weekly_summary_by_id(db, weekly_summary_id: int) -> WeeklySummary:
+    return get_item(db, WeeklySummary, weekly_summary_id, WeeklySummaryResponse)
+
+def get_ranked_weekly_summaries(db, query: str, n_results: int = 3) -> list[WeeklySummary]:
+    results = search_weekly_summaries_vectors(query, n_results)
+
+    summary_ids = [
+        match["weekly_summary_id"] for match in results
+    ]
+
+    summaries = db.scalars(
+        select(WeeklySummary).where(WeeklySummary.id.in_(summary_ids))
+    ).all()
+
+    # This is a dictionary of the summaries by id, so we can easily access the summary by id later.
+    summaries_by_id = {
+        summary.id: summary for summary in summaries
+    }
+
+    # This list comprehension returns the summaries in the order of the summary ids by ranking from the vector store.
+    return [
+        summaries_by_id[summary_id] for summary_id in summary_ids if summary_id in summaries_by_id
+    ]
+
+================================================================================
+FILE: backend/dockerfile
+================================================================================
+FROM python:3.13-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY app ./app
+
+EXPOSE 8000
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+================================================================================
+FILE: backend/requirements.txt
+================================================================================
+fastapi
+uvicorn[standard]
+sqlalchemy
+python-dotenv
+google-genai
+chromadb
+pydantic-ai
+
+================================================================================
+FILE: DECISIONS.md
+================================================================================
+## Backend persistence instead of localStorage
+
+Decision:
+Use FastAPI + SQLite.
+
+Why:
+The application already requires server-side GenAI and vector-search
+functionality, so centralizing persistence avoids creating separate client
+and server data models.
+
+Alternatives considered:
+- localStorage
+- IndexedDB
+
+Tradeoff:
+Adds backend setup complexity, but simplifies data ownership and prevents
+API credentials from reaching the browser.
+
+## JavaScript instead of TypeScript
+
+## GEN AI HEADS UP ##
+    Front End is not my main area of expertise, I am very much a backend engineer who utilizes multiple different LLMs when designing and implementing FE components and design.
+    For this challenge I will continue to lean on them for that, but will do less so than normal so I can showcase my ability to actually learn on the fly.
+
+Decision:
+Use JavaScript for the React frontend.
+
+Why:
+The challenge does not require TypeScript, and JavaScript reduces setup
+and implementation overhead for a one-week build. Additionally I have more expereince writing in JS. 
+
+Tradeoff:
+TypeScript would provide stronger compile-time guarantees, but the added
+type-definition work is not necessary for the scope of this project.
+
+## Data Models
+
+    10-6 waiting on feedback from team to decide on the Tasks data model: #### Feedback Recieved - Moving forward with my design decisions.
+
+        Need verification on focus level being completely user based, or provide a few options
+        -> Design focus level to enumerate to 5 levels 1-5 for a good level of customization and analytics use
+        Need verification on category, same issue, user based or provided options.
+        -> Design category into 5 different categories. Personal, work, learning, fitness, other and the default "uncategorized" 
+
+        --Will carry forward with the design around, leaving room to fix these. Designing around the idea that they are nullable when task is created, and required when task is marked as completed.--
+
+    ## Tasks model decisions made:
+        Created 3 enum objects to normalize the optional settings for the users.
+        
+        category: 
+            Defaulted category to an UNCATEGORIZED enum value. Allows the user to wait to categorize until they've completed the task or come back later to update. Also guarantees there is a value to read for analytic reasons.
+        Status:
+            Same idea as category, the default value will go in as Planned enum value. 
+        
+
+    ## Weekly Summary model decisions made:
+        10-6 - Evening:
+            Mulling over more design questions, when generating the weekly summary, I have the option of 
+            looking at all tasks based on completed_at time or created_at, this lead me down the rabbit hole of
+            what is important signal. Multiple tasks with a planned but never completed status are obviously signal of something, however since tasks can be created into the future, it may be something that was prioritized over. DECISION best concession is to create a new start_at column that tracks when work actually started on a task. 
+                    -> Future design possibilities, similar to a TTL, create a scheduled task set X days after task is scheduled to ask if user is ready to start. This can be variable.
+## CRUD Decisions
+    First main decision, as I do with other projects and apps, I chose to break the CRUD functionality into individual files for each model, and a general utilities file that contains operations that can be shared between models, like the general add/remove.
+
+    Task_crud:
+        Main functions are very simple, just pointing toward utilities. The update function is the important one that contains some business logic that validates input data before changing the task object.
+## Summary Decisions:
+    Historical summaries are currently derived from the task eventt timestamps and current task state. The task state is not versioned so generating an older week after a subsequent task changes can produce small differences. Task history and tracking can solve this, but I considered it outside of scope.
+
+    Each weekly summary is generated once, then is fetched from persisted storage if a user wants to look back at the summary for previous weeks.
+
+    Not in scope of this project, but the next big task I would work on is adding scheduled tasks that auto-generate the weekly summary for the previous week (after deciding on monday/sunday as the first day of the week) when the new week starts. So on mondays/sundays, generate the summary for the week that just finished. This makes things feel seamless for the users.
+
+================================================================================
+FILE: docker-compose.yaml
+================================================================================
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: sqlite:////data/productivity_tracker.db
+      GENAI_API_KEY: ${GENAI_API_KEY}
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY}
+    volumes:
+      - sqlite_data:/data
+      - chroma_data:/app/chroma_data
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+volumes:
+  sqlite_data:
+  chroma_data:
+
+================================================================================
+FILE: frontend/.gitignore
+================================================================================
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Local application data
+*.db
+*.sqlite
+*.sqlite3
+backend/chroma_data/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Frontend build/dependencies
+frontend/node_modules/
+frontend/dist/
+
+================================================================================
+FILE: frontend/dockerfile
+================================================================================
+FROM node:22-alpine AS build
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+RUN npm run build
+
+
+FROM nginx:alpine
+
+COPY --from=build /app/dist /usr/share/nginx/html
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
+
+================================================================================
+FILE: frontend/eslint.config.js
+================================================================================
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import { defineConfig, globalIgnores } from 'eslint/config'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{js,jsx}'],
+    extends: [
+      js.configs.recommended,
+      reactHooks.configs.flat.recommended,
+      reactRefresh.configs.vite,
+    ],
+    languageOptions: {
+      globals: globals.browser,
+      parserOptions: { ecmaFeatures: { jsx: true } },
+    },
+  },
+])
+
+================================================================================
+FILE: frontend/index.html
+================================================================================
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560;9..144,650&family=Outfit:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>Productivity Tracker</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+
+================================================================================
+FILE: frontend/nginx.conf
+================================================================================
+server {
+    listen 80;
+
+    location / {
+        root /usr/share/nginx/html;
+        index index.html;
+        try_files $uri /index.html;
+    }
+
+    location /tasks {
+        proxy_pass http://backend:8000;
+    }
+
+    location /healthz {
+        proxy_pass http://backend:8000;
+    }
+
+    location /weekly-summary {
+        proxy_pass http://backend:8000;
+    }
+
+    location /historical-search {
+        proxy_pass http://backend:8000;
+    }
+}
+
+================================================================================
+FILE: frontend/package.json
+================================================================================
+{
+  "name": "frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "eslint": "^10.10.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.6",
+    "globals": "^17.12.0",
+    "vite": "^8.3.0"
+  }
+}
+
+================================================================================
+FILE: frontend/README.md
+================================================================================
+# React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+
+## React Compiler
+
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+================================================================================
+FILE: frontend/src/api.js
+================================================================================
+// Thin client for the task API. Paths are relative so Vite can proxy them
+// to the FastAPI server on port 8000.
+
+async function readError(response) {
+  const text = await response.text()
+  if (!text) return response.statusText || 'Request failed'
+
+  try {
+    const body = JSON.parse(text)
+    if (typeof body.detail === 'string') return body.detail
+    if (Array.isArray(body.detail)) {
+      return body.detail.map((item) => item.msg || JSON.stringify(item)).join(' ')
+    }
+    return text
+  } catch {
+    return text
+  }
+}
+
+async function request(path, options = {}) {
+  let response
+  try {
+    response = await fetch(path, {
+      headers: { 'Content-Type': 'application/json', ...options.headers },
+      ...options,
+    })
+  } catch {
+    throw new Error('Cannot reach the API. Start the backend on port 8000.')
+  }
+
+  if (!response.ok) {
+    throw new Error(await readError(response))
+  }
+
+  if (response.status === 204) return null
+  return response.json()
+}
+
+export function checkHealth() {
+  return request('/healthz')
+}
+
+export function listTasks() {
+  return request('/tasks')
+}
+
+export function getTask(id) {
+  return request(`/tasks/${id}`)
+}
+
+// Create only accepts a name. Extra fields are applied with a follow-up patch.
+export function createTask(name) {
+  return request('/tasks', {
+    method: 'POST',
+    body: JSON.stringify({ name }),
+  })
+}
+
+export function updateTask(id, edits) {
+  return request(`/tasks/${id}`, {
+    method: 'PATCH',
+    body: JSON.stringify(edits),
+  })
+}
+
+export function deleteTask(id) {
+  return request(`/tasks/${id}`, { method: 'DELETE' })
+}
+
+// A missing week is an empty card, not a failed page.
+export async function getWeeklySummary(weekStart) {
+  try {
+    return await request(`/weekly-summary/${weekStart}`)
+  } catch (err) {
+    if (err.message === 'Weekly summary not found') return null
+    throw err
+  }
+}
+
+export function generateWeeklySummary(weekStart) {
+  return request(`/weekly-summary/${weekStart}`, { method: 'POST' })
+}
+
+// The agent searches saved weekly summaries and answers from those weeks only.
+export function searchHistory(query) {
+  const params = new URLSearchParams({ query })
+  return request(`/historical-search?${params}`)
+}
+
+================================================================================
+FILE: frontend/src/App.css
+================================================================================
+.app {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 28px 0 64px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.eyebrow {
+  margin-bottom: 4px;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+h1,
+h2 {
+  font-family: var(--serif);
+  font-weight: 560;
+  letter-spacing: -0.03em;
+}
+
+h1 {
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  line-height: 0.95;
+}
+
+h2 {
+  font-size: 1.6rem;
+}
+
+.ai-search {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.ai-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.ai-search-icon {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  color: var(--ink);
+}
+
+.ai-search-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.ai-search-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 5;
+  width: min(420px, calc(100vw - 32px));
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 0 16px 0 16px;
+  box-shadow: var(--shadow);
+}
+
+.ai-search-panel .form-error {
+  margin: 0;
+}
+
+.ai-search-answer p {
+  margin: 0;
+}
+
+.ai-search-answer .history-matches {
+  margin-top: 8px;
+}
+
+.banner,
+.form-error {
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #3a221e;
+  color: var(--danger);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.stats article,
+.panel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 0 18px 0 18px;
+  box-shadow: var(--shadow);
+}
+
+.stats article {
+  padding: 16px 18px;
+}
+
+.stats span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.stats strong {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  font-weight: 560;
+}
+
+.panel {
+  padding: 18px;
+}
+
+.weekly-summary {
+  margin: 16px 0;
+}
+
+.summary-suggestions-heading {
+  margin: 18px 0 8px;
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 560;
+  letter-spacing: -0.03em;
+}
+
+.summary-metrics,
+.summary-notes {
+  max-width: 72ch;
+}
+
+.summary-metrics {
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.summary-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 6px;
+}
+
+.history-matches {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-end;
+  margin-bottom: 16px;
+}
+
+.date-filter {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.date-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.week-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.week-arrow {
+  width: 2.25rem;
+  padding-inline: 0;
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+.week-range {
+  min-width: 7.5rem;
+  text-align: center;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.week-nav button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.panel-note,
+.empty-note,
+.task-dates,
+.task-meta {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.chart-scroll.is-scroll {
+  overflow-x: auto;
+}
+
+.chart {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 7), minmax(0, 1fr));
+  gap: 8px;
+  height: 180px;
+  align-items: end;
+}
+
+.chart-scroll.is-scroll .chart {
+  grid-template-columns: repeat(var(--cols, 7), 56px);
+  width: max-content;
+  min-width: 100%;
+}
+
+.chart-col {
+  display: grid;
+  grid-template-rows: 1fr auto auto;
+  min-width: 0;
+  height: 100%;
+  text-align: center;
+}
+
+.chart-bar-wrap {
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+}
+
+.chart-bar {
+  width: 100%;
+  border-radius: 8px 8px 3px 3px;
+  background: var(--focus-none);
+  min-height: 0;
+}
+
+.chart-bar.is-average {
+  border-radius: 8px;
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.chart-day,
+.chart-date {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.focus-1 { background: var(--focus-1); }
+.focus-2 { background: var(--focus-2); }
+.focus-3 { background: var(--focus-3); }
+.focus-4 { background: var(--focus-4); }
+.focus-5 { background: var(--focus-5); }
+.focus-none { background: var(--focus-none); }
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) 1fr;
+  gap: 16px;
+  margin-top: 16px;
+  align-items: stretch;
+}
+
+.task-form,
+.edit-form {
+  display: grid;
+  gap: 12px;
+}
+
+.task-form {
+  height: 100%;
+  align-content: start;
+}
+
+.task-form > .primary {
+  margin-top: auto;
+}
+
+.task-board {
+  height: 100%;
+}
+
+label,
+fieldset {
+  display: grid;
+  gap: 6px;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--raised);
+  color: var(--ink);
+}
+
+input::placeholder {
+  color: var(--muted);
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.focus-picks {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+}
+
+.focus-pick {
+  display: grid;
+  gap: 2px;
+  padding: 8px 4px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  color: white;
+  cursor: pointer;
+}
+
+.focus-pick span {
+  font-size: 0.65rem;
+  font-weight: 500;
+}
+
+.focus-pick.is-on {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+button {
+  border: 1px solid var(--line);
+  background: var(--raised);
+  border-radius: 999px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.primary {
+  border: 0;
+  background: var(--focus-4);
+  color: var(--ink);
+  padding: 12px 16px;
+  font-weight: 600;
+}
+
+.danger {
+  color: var(--danger);
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.filters .is-on {
+  background: #3a342c;
+  color: var(--ink);
+  border-color: #8d8072;
+}
+
+.task-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.task-card {
+  padding: 8px 10px;
+  border-radius: 0 16px 0 16px;
+  background: var(--raised);
+  border: 1px solid var(--line);
+  border-left: 6px solid var(--edge, var(--focus-none));
+  border-bottom: 6px solid var(--edge, var(--focus-none));
+}
+
+.task-main {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.task-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.task-meta,
+.task-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.task-actions {
+  margin-top: 0;
+}
+
+.chip,
+.focus-dot {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--bg-deep);
+  font-size: 0.78rem;
+}
+
+.chip.cat-work { background: #1a2838; }
+.chip.cat-learning { background: #163028; }
+.chip.cat-personal { background: #3a261e; }
+.chip.cat-fitness { background: #2a3018; }
+.chip.cat-other { background: #2c2634; }
+.chip.status-completed { background: #163028; }
+.chip.status-in-progress { background: #3a3016; }
+.chip.status-planned { background: #2c2824; }
+
+.focus-dot {
+  color: white;
+}
+
+.focus-dot.focus-1,
+.focus-pick.focus-1 { background: var(--focus-1); }
+.focus-dot.focus-2,
+.focus-pick.focus-2 { background: var(--focus-2); }
+.focus-dot.focus-3,
+.focus-pick.focus-3 { background: var(--focus-3); }
+.focus-dot.focus-4,
+.focus-pick.focus-4 { background: var(--focus-4); }
+.focus-dot.focus-5,
+.focus-pick.focus-5 { background: var(--focus-5); }
+.focus-dot.focus-none { background: var(--focus-none); color: white; }
+
+.task-dates {
+  margin-top: 4px;
+  font-size: 0.8rem;
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.pager span {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.edit-form {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 800px) {
+  .app {
+    width: min(100% - 20px, 1120px);
+    padding-top: 18px;
+  }
+
+  .topbar,
+  .panel-head,
+  .task-main,
+  .workspace,
+  .stats,
+  .field-row,
+  .date-inputs {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .ai-search,
+  .ai-search-bar {
+    align-items: flex-start;
+  }
+
+  .ai-search-panel {
+    position: static;
+    width: 100%;
+  }
+
+  .workspace {
+    align-items: start;
+  }
+
+  .stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .focus-picks {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .focus-pick span {
+    display: none;
+  }
+
+  .chart {
+    gap: 4px;
+  }
+}
+
+================================================================================
+FILE: frontend/src/App.jsx
+================================================================================
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { createTask, deleteTask, getTask, listTasks, updateTask } from './api'
+import TaskBoard from './components/TaskBoard'
+import TaskForm from './components/TaskForm'
+import TrendChart from './components/TrendChart'
+import WeeklySummary from './components/WeeklySummary'
+import HistoricalSearch from './components/HistoricalSearch'
+import { WEEKDAYS, eachDay, formatMinutes, parseDateInput, taskDay, toDateKey, weekDays } from './constants'
+import './App.css'
+
+function rangeLabel(days) {
+  if (!days.length) return 'No dates selected'
+  const start = days[0].toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
+  if (days.length === 1) return start
+  const end = days[days.length - 1]
+  const endText = end.toLocaleDateString(
+    undefined,
+    end.getMonth() === days[0].getMonth() ? { day: 'numeric' } : { month: 'short', day: 'numeric' },
+  )
+  return `${start} – ${endText}`
+}
+
+function tasksOnDays(tasks, days) {
+  const keys = new Set(days.map(toDateKey))
+  return tasks.filter((task) => {
+    const when = taskDay(task)
+    return when && keys.has(toDateKey(when))
+  })
+}
+
+// The task-list date controls decide which days the chart and list share.
+function selectByDate(tasks, filter) {
+  if (filter.mode === 'range') {
+    const start = parseDateInput(filter.start)
+    const end = parseDateInput(filter.end)
+    const days = start || end ? eachDay(start || end, end || start) : []
+    return { chartDays: days, chartLabel: rangeLabel(days), dateTasks: tasksOnDays(tasks, days) }
+  }
+
+  if (filter.mode === 'weekday') {
+    const name = WEEKDAYS.find((day) => day.value === filter.weekday)?.label ?? 'Weekday'
+    if (filter.weekday == null) {
+      return { chartDays: [], chartLabel: 'Pick a weekday', dateTasks: [] }
+    }
+    const dated = tasks.map(taskDay).filter(Boolean)
+    if (!dated.length) {
+      return { chartDays: [], chartLabel: name, dateTasks: [] }
+    }
+    const first = new Date(Math.min(...dated.map((day) => day.getTime())))
+    const last = new Date(Math.max(...dated.map((day) => day.getTime())))
+    first.setHours(0, 0, 0, 0)
+    last.setHours(0, 0, 0, 0)
+    while (first.getDay() !== filter.weekday) first.setDate(first.getDate() + 1)
+    const days = []
+    for (let cursor = new Date(first); cursor <= last && days.length < 52; cursor.setDate(cursor.getDate() + 7)) {
+      days.push(new Date(cursor))
+    }
+    const matched = tasks.filter((task) => taskDay(task)?.getDay() === filter.weekday)
+    return { chartDays: days, chartLabel: name, dateTasks: matched }
+  }
+
+  const days = weekDays(filter.weekOffset)
+  return {
+    chartDays: days,
+    chartLabel: filter.weekOffset === 0 ? 'This week' : rangeLabel(days),
+    dateTasks: tasksOnDays(tasks, days),
+  }
+}
+
+function averageFocus(tasks) {
+  const scored = tasks.filter((task) => task.focus_level != null)
+  if (!scored.length) return '—'
+  const total = scored.reduce((sum, task) => sum + task.focus_level, 0)
+  return (total / scored.length).toFixed(1)
+}
+
+export default function App() {
+  const [tasks, setTasks] = useState([])
+  const [error, setError] = useState('')
+  const [saving, setSaving] = useState(false)
+  const [dateFilter, setDateFilter] = useState({
+    mode: 'week',
+    weekOffset: 0,
+    start: '',
+    end: '',
+    weekday: null,
+  })
+
+  const refresh = useCallback(async () => {
+    try {
+      setTasks(await listTasks())
+      setError('')
+    } catch (err) {
+      setError(err.message)
+    }
+  }, [])
+
+  useEffect(() => {
+    // Reload from the API on mount so a refresh keeps the tasks the backend stored.
+    refresh()
+  }, [refresh])
+
+  async function handleCreate(name, edits) {
+    setSaving(true)
+    setError('')
+    try {
+      const created = await createTask(name)
+      if (Object.keys(edits).length) {
+        await updateTask(created.id, edits)
+      }
+      await refresh()
+    } catch (err) {
+      await refresh()
+      throw err
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  async function handleSave(id, edits) {
+    await updateTask(id, edits)
+    await refresh()
+  }
+
+  async function handleDelete(id) {
+    await deleteTask(id)
+    await refresh()
+  }
+
+  const { chartDays, chartLabel, dateTasks } = useMemo(
+    () => selectByDate(tasks, dateFilter),
+    [tasks, dateFilter],
+  )
+
+  const minutes = tasks.reduce((sum, task) => sum + (task.time_spent_minutes || 0), 0)
+  const completed = tasks.filter((task) => task.status === 'completed').length
+
+  return (
+    <div className="app">
+      <header className="topbar">
+        <div>
+          <p className="eyebrow">Daily log</p>
+          <h1>Productivity tracker</h1>
+        </div>
+        <HistoricalSearch />
+      </header>
+
+      {error && <p className="banner">{error}</p>}
+
+      <section className="stats" aria-label="Summary">
+        <article>
+          <span>Tasks</span>
+          <strong>{tasks.length}</strong>
+        </article>
+        <article>
+          <span>Completed</span>
+          <strong>{completed}</strong>
+        </article>
+        <article>
+          <span>Time logged</span>
+          <strong>{formatMinutes(minutes)}</strong>
+        </article>
+        <article>
+          <span>Avg focus</span>
+          <strong>{averageFocus(tasks)}</strong>
+        </article>
+      </section>
+
+      <TrendChart
+        tasks={dateTasks}
+        days={chartDays}
+        label={chartLabel}
+        showAverage={dateFilter.mode === 'weekday'}
+      />
+
+      <WeeklySummary
+        weekStart={dateFilter.mode === 'week' && chartDays[0] ? toDateKey(chartDays[0]) : null}
+        label={dateFilter.mode === 'week' ? chartLabel : 'Week'}
+      />
+
+      <div className="workspace">
+        <TaskForm onCreate={handleCreate} busy={saving} />
+        <TaskBoard
+          tasks={dateTasks}
+          dateFilter={dateFilter}
+          onDateFilter={setDateFilter}
+          onSave={handleSave}
+          onDelete={handleDelete}
+          onOpen={getTask}
+        />
+      </div>
+    </div>
+  )
+}
+
+================================================================================
+FILE: frontend/src/components/HistoricalSearch.jsx
+================================================================================
+import { useEffect, useRef, useState } from 'react'
+import { searchHistory } from '../api'
+
+export default function HistoricalSearch() {
+  const [open, setOpen] = useState(false)
+  const [query, setQuery] = useState('')
+  const [result, setResult] = useState(null)
+  const [status, setStatus] = useState('idle')
+  const [error, setError] = useState('')
+  const inputRef = useRef(null)
+  const rootRef = useRef(null)
+
+  useEffect(() => {
+    if (open) inputRef.current?.focus()
+  }, [open])
+
+  // A click on the page, outside this control, dismisses the open panel.
+  useEffect(() => {
+    if (!open) return
+
+    function handlePointerDown(event) {
+      if (!rootRef.current?.contains(event.target)) {
+        setOpen(false)
+      }
+    }
+
+    document.addEventListener('pointerdown', handlePointerDown)
+    return () => document.removeEventListener('pointerdown', handlePointerDown)
+  }, [open])
+
+  async function handleSubmit(event) {
+    event.preventDefault()
+    const trimmed = query.trim()
+    if (!trimmed) return
+
+    setStatus('searching')
+    setError('')
+    try {
+      const answer = await searchHistory(trimmed)
+      setResult(answer)
+      setStatus('ready')
+    } catch (err) {
+      setStatus('error')
+      setError(err.message)
+    }
+  }
+
+  const matched = Array.isArray(result?.matched_summary_ids) ? result.matched_summary_ids : []
+
+  return (
+    <div className="ai-search" ref={rootRef}>
+      <div className="ai-search-bar">
+        <span>AI assisted search</span>
+        <button
+          type="button"
+          className="ai-search-icon"
+          aria-expanded={open}
+          aria-controls="ai-search-panel"
+          aria-label="AI assisted search"
+          onClick={() => setOpen((value) => !value)}
+        >
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <circle cx="7" cy="7" r="4.25" fill="none" stroke="currentColor" strokeWidth="1.6" />
+            <path d="M10.2 10.2 13.5 13.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+          </svg>
+        </button>
+      </div>
+
+      {open && (
+        <form id="ai-search-panel" className="ai-search-panel" onSubmit={handleSubmit}>
+          <input
+            ref={inputRef}
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Which weeks had the most deep work?"
+            aria-label="Question"
+          />
+          <button className="primary" type="submit" disabled={status === 'searching' || !query.trim()}>
+            {status === 'searching' ? 'Searching…' : 'Search'}
+          </button>
+
+          {error && <p className="form-error">{error}</p>}
+
+          {result && status === 'ready' && (
+            <div className="ai-search-answer">
+              <p>{result.answer}</p>
+              {matched.length > 0 && (
+                <p className="history-matches">Matched summaries: {matched.join(', ')}</p>
+              )}
+            </div>
+          )}
+        </form>
+      )}
+    </div>
+  )
+}
+
+================================================================================
+FILE: frontend/src/components/TaskBoard.jsx
+================================================================================
+import { useEffect, useState } from 'react'
+import { CATEGORIES, FOCUS_LEVELS, STATUSES, WEEKDAYS, focusLabel, formatMinutes, formatWhen, toDateKey, toDateTimeInput, weekDays } from '../constants'
+
+function taskToForm(task) {
+  return {
+    name: task.name,
+    category: task.category,
+    status: task.status,
+    timeSpent: task.time_spent_minutes ?? '',
+    focus: task.focus_level == null ? '' : String(task.focus_level),
+    startedAt: toDateTimeInput(task.started_at),
+  }
+}
+
+function formToPatch(form) {
+  return {
+    name: form.name.trim(),
+    category: form.category,
+    status: form.status,
+    time_spent_minutes: form.timeSpent === '' ? null : Number(form.timeSpent),
+    focus_level: form.focus === '' ? null : Number(form.focus),
+    started_at: form.startedAt ? form.startedAt : null,
+  }
+}
+
+const PAGE_SIZE = 5
+
+export default function TaskBoard({ tasks, dateFilter, onDateFilter, onSave, onDelete, onOpen }) {
+  const [filter, setFilter] = useState('all')
+  const [page, setPage] = useState(0)
+  const [editingId, setEditingId] = useState(null)
+  const [draft, setDraft] = useState(null)
+  const [error, setError] = useState('')
+  const [busy, setBusy] = useState(false)
+
+  const visible = filter === 'all' ? tasks : tasks.filter((task) => task.status === filter)
+  const pageCount = Math.max(1, Math.ceil(visible.length / PAGE_SIZE))
+  const currentPage = Math.min(page, pageCount - 1)
+  const pageTasks = visible.slice(currentPage * PAGE_SIZE, currentPage * PAGE_SIZE + PAGE_SIZE)
+
+  useEffect(() => {
+    // Close the editor when the open task is no longer in the selected week.
+    if (editingId != null && !tasks.some((task) => task.id === editingId)) {
+      setEditingId(null)
+      setDraft(null)
+    }
+  }, [tasks, editingId])
+
+  useEffect(() => {
+    // A new date or status view starts on the first page.
+    setPage(0)
+  }, [filter, dateFilter])
+
+  useEffect(() => {
+    setPage((current) => Math.min(current, Math.max(0, pageCount - 1)))
+  }, [pageCount])
+
+  async function openEditor(task) {
+    setError('')
+    setEditingId(task.id)
+    setDraft(taskToForm(task))
+    try {
+      // Reload the single task so the GET /tasks/{id} endpoint stays exercised.
+      const fresh = await onOpen(task.id)
+      setDraft(taskToForm(fresh))
+    } catch (err) {
+      setError(err.message)
+    }
+  }
+
+  function update(field, value) {
+    setDraft((current) => ({ ...current, [field]: value }))
+  }
+
+  async function save(event) {
+    event.preventDefault()
+    if (!draft || draft.name.trim().length < 3) {
+      setError('Task name needs at least 3 characters.')
+      return
+    }
+    if (draft.status === 'completed') {
+      const time = draft.timeSpent === '' ? null : Number(draft.timeSpent)
+      if (time == null || time <= 0 || draft.focus === '') {
+        setError('Completing a task needs time spent above 0 and a focus level.')
+        return
+      }
+    }
+
+    setBusy(true)
+    setError('')
+    try {
+      await onSave(editingId, formToPatch(draft))
+      setEditingId(null)
+      setDraft(null)
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  async function remove(id) {
+    setBusy(true)
+    setError('')
+    try {
+      await onDelete(id)
+      if (editingId === id) {
+        setEditingId(null)
+        setDraft(null)
+      }
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  return (
+    <section className="panel task-board">
+      <div className="panel-head">
+        <div>
+          <p className="eyebrow">Tasks</p>
+          <h2>{visible.length} shown</h2>
+        </div>
+        <div className="filters" role="tablist" aria-label="Filter by status">
+          {['all', ...STATUSES].map((status) => (
+            <button
+              key={status}
+              type="button"
+              className={filter === status ? 'is-on' : ''}
+              onClick={() => setFilter(status)}
+            >
+              {status}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <DateFilter dateFilter={dateFilter} onDateFilter={onDateFilter} />
+
+      {error && <p className="form-error">{error}</p>}
+
+      {visible.length === 0 ? (
+        <p className="empty-note">No tasks in this view yet.</p>
+      ) : (
+        <ul className="task-list">
+          {pageTasks.map((task) => {
+            const editing = editingId === task.id
+            return (
+              <li
+                key={task.id}
+                className={`task-card cat-${task.category} ${editing ? 'is-editing' : ''}`}
+                style={{ '--edge': `var(--focus-${task.focus_level || 'none'})` }}
+              >
+                <div className="task-main">
+                  <div>
+                    <p className="task-name">{task.name}</p>
+                    <p className="task-meta">
+                      <span className={`chip cat-${task.category}`}>{task.category}</span>
+                      <span className={`chip status-${task.status}`}>{task.status}</span>
+                      <span>{formatMinutes(task.time_spent_minutes)}</span>
+                      <span className={`focus-dot focus-${task.focus_level || 'none'}`}>
+                        {focusLabel(task.focus_level)}
+                      </span>
+                    </p>
+                  </div>
+                  <div className="task-actions">
+                    <button type="button" onClick={() => (editing ? setEditingId(null) : openEditor(task))}>
+                      {editing ? 'Close' : 'Edit'}
+                    </button>
+                    <button type="button" className="danger" onClick={() => remove(task.id)} disabled={busy}>
+                      Delete
+                    </button>
+                  </div>
+                </div>
+                <p className="task-dates">
+                  Created {formatWhen(task.created_at)}
+                  {task.started_at ? ` · Started ${formatWhen(task.started_at)}` : ''}
+                  {task.completed_at ? ` · Done ${formatWhen(task.completed_at)}` : ''}
+                </p>
+
+                {editing && draft && (
+                  <form className="edit-form" onSubmit={save}>
+                    <label>
+                      Name
+                      <input value={draft.name} onChange={(event) => update('name', event.target.value)} maxLength={255} />
+                    </label>
+                    <div className="field-row">
+                      <label>
+                        Category
+                        <select value={draft.category} onChange={(event) => update('category', event.target.value)}>
+                          {CATEGORIES.map((category) => (
+                            <option key={category} value={category}>
+                              {category}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                      <label>
+                        Status
+                        <select value={draft.status} onChange={(event) => update('status', event.target.value)}>
+                          {STATUSES.map((status) => (
+                            <option key={status} value={status}>
+                              {status}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                    </div>
+                    <div className="field-row">
+                      <label>
+                        Minutes
+                        <input
+                          type="number"
+                          min="0"
+                          value={draft.timeSpent}
+                          onChange={(event) => update('timeSpent', event.target.value)}
+                        />
+                      </label>
+                      <label>
+                        Focus
+                        <select value={draft.focus} onChange={(event) => update('focus', event.target.value)}>
+                          <option value="">Unset</option>
+                          {FOCUS_LEVELS.map((level) => (
+                            <option key={level.value} value={level.value}>
+                              {level.value} · {level.label}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                    </div>
+                    <label>
+                      Started at
+                      <input
+                        type="datetime-local"
+                        value={draft.startedAt}
+                        onChange={(event) => update('startedAt', event.target.value)}
+                      />
+                    </label>
+                    <button className="primary" type="submit" disabled={busy}>
+                      {busy ? 'Saving…' : 'Save changes'}
+                    </button>
+                  </form>
+                )}
+              </li>
+            )
+          })}
+        </ul>
+      )}
+
+      {visible.length > PAGE_SIZE && (
+        <div className="pager">
+          <button type="button" onClick={() => setPage(currentPage - 1)} disabled={currentPage === 0}>
+            Previous
+          </button>
+          <span>
+            {currentPage + 1} / {pageCount}
+          </span>
+          <button type="button" onClick={() => setPage(currentPage + 1)} disabled={currentPage >= pageCount - 1}>
+            Next
+          </button>
+        </div>
+      )}
+    </section>
+  )
+}
+
+function DateFilter({ dateFilter, onDateFilter }) {
+  const { mode, weekOffset, start, end, weekday } = dateFilter
+  const week = weekDays(weekOffset)
+  const weekText = `${week[0].toLocaleDateString(undefined, { month: 'short', day: 'numeric' })} – ${week[6].toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}`
+
+  function chooseMode(nextMode) {
+    onDateFilter((current) => {
+      if (nextMode === 'range' && !current.start && !current.end) {
+        const days = weekDays(current.weekOffset)
+        return { ...current, mode: nextMode, start: toDateKey(days[0]), end: toDateKey(days[6]) }
+      }
+      return { ...current, mode: nextMode }
+    })
+  }
+
+  return (
+    <div className="date-filter">
+      <div className="filters" role="tablist" aria-label="How to choose dates">
+        {[
+          ['week', 'Week'],
+          ['range', 'Dates'],
+          ['weekday', 'Weekday'],
+        ].map(([value, label]) => (
+          <button key={value} type="button" className={mode === value ? 'is-on' : ''} onClick={() => chooseMode(value)}>
+            {label}
+          </button>
+        ))}
+      </div>
+
+      {mode === 'week' && (
+        <div className="week-nav">
+          <button type="button" className="week-arrow" aria-label="Previous week" onClick={() => onDateFilter((current) => ({ ...current, weekOffset: current.weekOffset - 1 }))}>
+            ←
+          </button>
+          <button
+            type="button"
+            className="week-arrow"
+            aria-label="Next week"
+            disabled={weekOffset >= 0}
+            onClick={() => onDateFilter((current) => ({ ...current, weekOffset: Math.min(current.weekOffset + 1, 0) }))}
+          >
+            →
+          </button>
+          <span className="week-range">{weekText}</span>
+          <button type="button" disabled={weekOffset === 0} onClick={() => onDateFilter((current) => ({ ...current, weekOffset: 0 }))}>
+            This week
+          </button>
+        </div>
+      )}
+
+      {mode === 'range' && (
+        <div className="date-inputs">
+          <label>
+            Start
+            <input type="date" value={start} onChange={(event) => onDateFilter((current) => ({ ...current, start: event.target.value }))} />
+          </label>
+          <label>
+            End
+            <input type="date" value={end} onChange={(event) => onDateFilter((current) => ({ ...current, end: event.target.value }))} />
+          </label>
+        </div>
+      )}
+
+      {mode === 'weekday' && (
+        <div className="filters" role="group" aria-label="Day of week">
+          {WEEKDAYS.map((day) => (
+            <button
+              key={day.value}
+              type="button"
+              className={weekday === day.value ? 'is-on' : ''}
+              aria-pressed={weekday === day.value}
+              onClick={() => onDateFilter((current) => ({ ...current, weekday: day.value }))}
+            >
+              {day.short}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+================================================================================
+FILE: frontend/src/components/TaskForm.jsx
+================================================================================
+import { useState } from 'react'
+import { CATEGORIES, FOCUS_LEVELS, STATUSES } from '../constants'
+
+const EMPTY = {
+  name: '',
+  category: 'uncategorized',
+  status: 'planned',
+  timeSpent: '',
+  focus: '',
+}
+
+export default function TaskForm({ onCreate, busy }) {
+  const [form, setForm] = useState(EMPTY)
+  const [error, setError] = useState('')
+
+  function update(field, value) {
+    setForm((current) => ({ ...current, [field]: value }))
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault()
+    setError('')
+
+    const name = form.name.trim()
+    if (name.length < 3) {
+      setError('Task name needs at least 3 characters.')
+      return
+    }
+
+    const time = form.timeSpent === '' ? null : Number(form.timeSpent)
+    const focus = form.focus === '' ? null : Number(form.focus)
+
+    // The API rejects a completed task that is missing time or focus.
+    if (form.status === 'completed' && (time == null || time <= 0 || focus == null)) {
+      setError('Completing a task needs time spent above 0 and a focus level.')
+      return
+    }
+
+    const edits = {}
+    if (form.category !== 'uncategorized') edits.category = form.category
+    if (form.status !== 'planned') edits.status = form.status
+    if (time != null) edits.time_spent_minutes = time
+    if (focus != null) edits.focus_level = focus
+
+    try {
+      await onCreate(name, edits)
+      setForm(EMPTY)
+    } catch (err) {
+      setError(err.message)
+    }
+  }
+
+  return (
+    <form className="panel task-form" onSubmit={handleSubmit}>
+      <div className="panel-head">
+        <div>
+          <p className="eyebrow">Log work</p>
+          <h2>New task</h2>
+        </div>
+      </div>
+
+      <label>
+        Task name
+        <input
+          value={form.name}
+          onChange={(event) => update('name', event.target.value)}
+          placeholder="Wrote code"
+          maxLength={255}
+          required
+        />
+      </label>
+
+      <div className="field-row">
+        <label>
+          Category
+          <select value={form.category} onChange={(event) => update('category', event.target.value)}>
+            {CATEGORIES.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Status
+          <select value={form.status} onChange={(event) => update('status', event.target.value)}>
+            {STATUSES.map((status) => (
+              <option key={status} value={status}>
+                {status}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+
+      <label>
+        Time spent (minutes)
+        <input
+          type="number"
+          min="0"
+          value={form.timeSpent}
+          onChange={(event) => update('timeSpent', event.target.value)}
+          placeholder="90"
+        />
+      </label>
+
+      <fieldset>
+        <legend>Focus level</legend>
+        <div className="focus-picks">
+          {FOCUS_LEVELS.map((level) => (
+            <button
+              key={level.value}
+              type="button"
+              className={`focus-pick focus-${level.value} ${form.focus === String(level.value) ? 'is-on' : ''}`}
+              onClick={() => update('focus', form.focus === String(level.value) ? '' : String(level.value))}
+              aria-pressed={form.focus === String(level.value)}
+            >
+              {level.value}
+              <span>{level.label}</span>
+            </button>
+          ))}
+        </div>
+      </fieldset>
+
+      {error && <p className="form-error">{error}</p>}
+
+      <button className="primary" type="submit" disabled={busy}>
+        {busy ? 'Saving…' : 'Add task'}
+      </button>
+    </form>
+  )
+}
+
+================================================================================
+FILE: frontend/src/components/TrendChart.jsx
+================================================================================
+import { taskDay, toDateKey } from '../constants'
+
+function dayLabel(date) {
+  return date.toLocaleDateString(undefined, { weekday: 'short' })
+}
+
+function dateLabel(date) {
+  return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
+}
+
+export default function TrendChart({ tasks, days, label, showAverage = false }) {
+  const buckets = days.map((date) => ({
+    key: toDateKey(date),
+    date,
+    minutes: 0,
+    focusTotal: 0,
+    focusCount: 0,
+    completed: 0,
+    completedFocusTotal: 0,
+    completedFocusCount: 0,
+  }))
+  const byKey = new Map(buckets.map((day) => [day.key, day]))
+
+  tasks.forEach((task) => {
+    const when = taskDay(task)
+    if (!when) return
+    const bucket = byKey.get(toDateKey(when))
+    if (!bucket) return
+    bucket.minutes += task.time_spent_minutes || 0
+    if (task.focus_level != null) {
+      bucket.focusTotal += task.focus_level
+      bucket.focusCount += 1
+    }
+    if (task.status === 'completed') {
+      bucket.completed += 1
+      if (task.focus_level != null) {
+        bucket.completedFocusTotal += task.focus_level
+        bucket.completedFocusCount += 1
+      }
+    }
+  })
+
+  // A date only stays on the chart when at least one task was completed that day.
+  const plotted = buckets.filter((day) => day.completed > 0)
+  const completedFocusCount = plotted.reduce((sum, day) => sum + day.completedFocusCount, 0)
+  const averageFocus = completedFocusCount
+    ? plotted.reduce((sum, day) => sum + day.completedFocusTotal, 0) / completedFocusCount
+    : null
+  const maxMinutes = Math.max(...plotted.map((day) => day.minutes), 1)
+  const columnCount = plotted.length + (showAverage && averageFocus != null ? 1 : 0)
+  const wide = columnCount > 7
+
+  return (
+    <section className="panel chart-panel" aria-labelledby="trend-heading">
+      <div className="panel-head">
+        <div>
+          <p className="eyebrow">{label}</p>
+          <h2 id="trend-heading">Time logged</h2>
+        </div>
+        <p className="panel-note">Follows the dates selected on the task list.</p>
+      </div>
+
+      {days.length === 0 ? (
+        <p className="empty-note">Choose a week, a date range, or a weekday to plot.</p>
+      ) : plotted.length === 0 ? (
+        <p className="empty-note">No completed tasks in this view.</p>
+      ) : (
+        <div className={`chart-scroll ${wide ? 'is-scroll' : ''}`}>
+          <div
+            className="chart"
+            style={{ '--cols': columnCount }}
+            role="img"
+            aria-label={`Minutes logged for ${label}`}
+          >
+            {plotted.map((day) => {
+              const height = Math.max((day.minutes / maxMinutes) * 100, day.minutes ? 8 : 0)
+              const average = day.focusCount ? Math.round(day.focusTotal / day.focusCount) : 0
+              return (
+                <div className="chart-col" key={day.key}>
+                  <div className="chart-bar-wrap">
+                    <div
+                      className={`chart-bar focus-${average || 'none'}`}
+                      style={{ height: `${height}%` }}
+                      title={`${dateLabel(day.date)}: ${day.minutes} min, ${day.completed} completed`}
+                    />
+                  </div>
+                  <span className="chart-day">{dayLabel(day.date)}</span>
+                  <span className="chart-date">{day.date.getDate()}</span>
+                </div>
+              )
+            })}
+            {showAverage && averageFocus != null && (
+              <div className="chart-col">
+                <div className="chart-bar-wrap">
+                  <div
+                    className={`chart-bar is-average focus-${Math.round(averageFocus)}`}
+                    style={{ height: `${(averageFocus / 5) * 100}%` }}
+                    title={`Average focus ${averageFocus.toFixed(1)} of 5`}
+                  />
+                </div>
+                <span className="chart-day">Avg</span>
+                <span className="chart-date">{averageFocus.toFixed(1)}</span>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </section>
+  )
+}
+
+================================================================================
+FILE: frontend/src/components/WeeklySummary.jsx
+================================================================================
+import { useEffect, useState } from 'react'
+import { generateWeeklySummary, getWeeklySummary } from '../api'
+import { formatMinutes } from '../constants'
+
+function focusText(value) {
+  return value == null ? '—' : Number(value).toFixed(1)
+}
+
+export default function WeeklySummary({ weekStart, label }) {
+  const [summary, setSummary] = useState(null)
+  const [status, setStatus] = useState(weekStart ? 'loading' : 'idle')
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    if (!weekStart) {
+      setSummary(null)
+      setStatus('idle')
+      setError('')
+      return
+    }
+
+    let cancelled = false
+    setStatus('loading')
+    setError('')
+
+    // Saved summaries are fetched. Generating is a separate action because it calls Gemini.
+    getWeeklySummary(weekStart)
+      .then((result) => {
+        if (cancelled) return
+        setSummary(result)
+        setStatus(result ? 'ready' : 'empty')
+      })
+      .catch((err) => {
+        if (cancelled) return
+        setSummary(null)
+        setError(err.message)
+        setStatus('error')
+      })
+
+    return () => {
+      cancelled = true
+    }
+  }, [weekStart])
+
+  async function handleGenerate() {
+    setStatus('generating')
+    setError('')
+    try {
+      const created = await generateWeeklySummary(weekStart)
+      setSummary(created)
+      setStatus('ready')
+    } catch (err) {
+      setStatus(summary ? 'ready' : 'empty')
+      setError(err.message)
+    }
+  }
+
+  const suggestions = Array.isArray(summary?.weekly_summary_suggestions)
+    ? summary.weekly_summary_suggestions
+    : []
+
+  return (
+    <section className="panel weekly-summary" aria-labelledby="summary-heading">
+      <div className="panel-head">
+        <div>
+          <p className="eyebrow">{label || 'Week'}</p>
+          <h2 id="summary-heading">Weekly summary</h2>
+        </div>
+        {weekStart && !summary && status !== 'loading' && (
+          <button type="button" onClick={handleGenerate} disabled={status === 'generating'}>
+            {status === 'generating' ? 'Writing…' : 'Generate'}
+          </button>
+        )}
+      </div>
+
+      {!weekStart && <p className="empty-note">Choose a week to see its summary.</p>}
+      {weekStart && status === 'loading' && <p className="empty-note">Looking up this week…</p>}
+      {error && <p className="form-error">{error}</p>}
+
+      {summary && status !== 'loading' && (
+        <>
+          <p className="summary-metrics">
+            {summary.total_tasks_completed} completed · {formatMinutes(summary.total_time_spent_minutes)} · focus{' '}
+            {focusText(summary.average_focus_level)}
+          </p>
+          <p className="summary-notes">{summary.weekly_summary_notes || 'No written summary yet.'}</p>
+          {suggestions.length > 0 && (
+            <>
+              <h3 className="summary-suggestions-heading">Suggestions:</h3>
+              <ul className="summary-list">
+                {suggestions.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </>
+          )}
+        </>
+      )}
+
+      {weekStart && status === 'empty' && !error && (
+        <p className="empty-note">No summary for this week yet.</p>
+      )}
+    </section>
+  )
+}
+
+================================================================================
+FILE: frontend/src/constants.js
+================================================================================
+export const CATEGORIES = [
+  'uncategorized',
+  'work',
+  'learning',
+  'personal',
+  'fitness',
+  'other',
+]
+
+export const STATUSES = ['planned', 'in-progress', 'completed']
+
+export const FOCUS_LEVELS = [
+  { value: 1, label: 'Very low' },
+  { value: 2, label: 'Low' },
+  { value: 3, label: 'Medium' },
+  { value: 4, label: 'High' },
+  { value: 5, label: 'Very high' },
+]
+
+export function focusLabel(level) {
+  return FOCUS_LEVELS.find((item) => item.value === level)?.label ?? 'Unset'
+}
+
+// SQLite often returns "YYYY-MM-DD HH:MM:SS". Normalize before parsing.
+export function parseApiDate(value) {
+  if (!value) return null
+  const normalized = typeof value === 'string' ? value.replace(' ', 'T') : value
+  const date = new Date(normalized)
+  return Number.isNaN(date.getTime()) ? null : date
+}
+
+export const WEEKDAYS = [
+  { value: 0, short: 'Sun', label: 'Sundays' },
+  { value: 1, short: 'Mon', label: 'Mondays' },
+  { value: 2, short: 'Tue', label: 'Tuesdays' },
+  { value: 3, short: 'Wed', label: 'Wednesdays' },
+  { value: 4, short: 'Thu', label: 'Thursdays' },
+  { value: 5, short: 'Fri', label: 'Fridays' },
+  { value: 6, short: 'Sat', label: 'Saturdays' },
+]
+
+export const WEEK_LENGTH = 7
+
+export function startOfWeek(date) {
+  const start = new Date(date)
+  start.setHours(0, 0, 0, 0)
+  start.setDate(start.getDate() - start.getDay())
+  return start
+}
+
+// Sunday–Saturday dates for the current week, or earlier when weekOffset is negative.
+export function weekDays(weekOffset) {
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  const start = startOfWeek(today)
+  start.setDate(start.getDate() + weekOffset * WEEK_LENGTH)
+  return Array.from({ length: WEEK_LENGTH }, (_, index) => {
+    const date = new Date(start)
+    date.setDate(start.getDate() + index)
+    return date
+  })
+}
+
+// Same day the chart uses: finished, then started, then logged.
+export function taskDay(task) {
+  return parseApiDate(task.completed_at) || parseApiDate(task.started_at) || parseApiDate(task.created_at)
+}
+
+// Date inputs are local calendar days. Parsing them as UTC shifts the day.
+export function parseDateInput(value) {
+  if (!value) return null
+  const [year, month, day] = value.split('-').map(Number)
+  if (!year || !month || !day) return null
+  return new Date(year, month - 1, day)
+}
+
+export function eachDay(start, end) {
+  const first = new Date(start)
+  const last = new Date(end)
+  first.setHours(0, 0, 0, 0)
+  last.setHours(0, 0, 0, 0)
+  const [from, to] = first <= last ? [first, last] : [last, first]
+  const days = []
+  const cursor = new Date(from)
+  while (cursor <= to && days.length < 120) {
+    days.push(new Date(cursor))
+    cursor.setDate(cursor.getDate() + 1)
+  }
+  return days
+}
+
+export function toDateKey(date) {
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
+export function toDateTimeInput(value) {
+  const date = parseApiDate(value)
+  if (!date) return ''
+  const pad = (part) => String(part).padStart(2, '0')
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`
+}
+
+export function formatWhen(value) {
+  const date = parseApiDate(value)
+  if (!date) return '—'
+  return date.toLocaleString(undefined, {
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+  })
+}
+
+export function formatMinutes(minutes) {
+  if (minutes == null) return '—'
+  const hours = Math.floor(minutes / 60)
+  const rest = minutes % 60
+  if (hours === 0) return `${rest}m`
+  if (rest === 0) return `${hours}h`
+  return `${hours}h ${rest}m`
+}
+
+================================================================================
+FILE: frontend/src/index.css
+================================================================================
+:root {
+  --bg: #100e0c;
+  --bg-deep: #181614;
+  --ink: #f2ece4;
+  --muted: #a3988c;
+  --card: #1a1816;
+  --raised: #242220;
+  --line: #3a342c;
+  --accent: #8fbfa8;
+  --danger: #e07a6c;
+  --focus-1: #9a4520;
+  --focus-2: #a67c10;
+  --focus-3: #5c6828;
+  --focus-4: #174e3d;
+  --focus-5: #163a66;
+  --focus-none: #4a433c;
+  --shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  --sans: 'Outfit', 'Segoe UI', sans-serif;
+  --serif: 'Fraunces', Georgia, serif;
+  color-scheme: dark;
+  font: 16px/1.45 var(--sans);
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(255, 244, 220, 0.05), transparent 28rem),
+    var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+#root {
+  min-height: 100svh;
+}
+
+================================================================================
+FILE: frontend/src/main.jsx
+================================================================================
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.jsx'
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
+
+================================================================================
+FILE: frontend/vite.config.js
+================================================================================
+import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite'
+
+// Proxy API calls through Vite so the browser stays same-origin.
+// The FastAPI app has no CORS middleware, and this keeps that backend untouched.
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    proxy: {
+      '/tasks': 'http://127.0.0.1:8000',
+      '/healthz': 'http://127.0.0.1:8000',
+      '/weekly-summary': 'http://127.0.0.1:8000',
+      '/historical-search': 'http://127.0.0.1:8000',
+    },
+  },
+})
+
+================================================================================
+FILE: README.md
+================================================================================
+# productivity-tracker
+Forward Deployed builders challenge

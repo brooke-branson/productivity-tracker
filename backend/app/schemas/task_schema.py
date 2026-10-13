@@ -4,7 +4,7 @@ from datetime import datetime
 from app.db.models.task_model import Category, FocusLevel, TaskStatus
 
 class TaskCreate(BaseModel):
-    name: str = Field(default=None,min_length=3, max_length=255)
+    name: str = Field(min_length=3, max_length=255)
 
 
 class TaskUpdate(BaseModel):
