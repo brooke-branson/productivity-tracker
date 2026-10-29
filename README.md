@@ -1,6 +1,6 @@
 # Productivity Tracker
 
-Productivity tracking application built for the "Forward Deployed" challenge.
+Productivity tracking application.
 
 The application allows users to track tasks, time spent, focus level, and task status; visualize recent productivity; generate AI-assisted weekly summaries; and search historical productivity data using natural-language semantic search.
 
