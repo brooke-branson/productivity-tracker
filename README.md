@@ -1,6 +1,6 @@
 # Productivity Tracker
 
-Productivity tracking application built for the "Forward Deployed" challenge.
+A productivity tracking application for logging tasks, reviewing recent work, and searching past weeks.
 
 The application allows users to track tasks, time spent, focus level, and task status; visualize recent productivity; generate AI-assisted weekly summaries; and search historical productivity data using natural-language semantic search.
 
@@ -250,7 +250,7 @@ SQLite remains the authoritative source of persisted application data. After Chr
 
 ## Design Decisions
 
-Several design choices were intentionally made for the scope of this challenge.
+Several design choices were made to keep the application small and local.
 
 ### SQLite Instead of Browser Persistence
 
@@ -295,9 +295,7 @@ This reduces parsing ambiguity and gives the API a predictable contract.
 
 React was implemented using JavaScript.
 
-For the scope and timeframe of the challenge, JavaScript reduced implementation overhead while allowing more time to focus on backend architecture, AI integration, persistence, and retrieval.
-
-Additional reasoning and implementation notes are available in `DECISIONS.md`.
+JavaScript keeps the frontend setup light so more of the project can stay on backend architecture, AI integration, persistence, and retrieval.
 
 ---
 
@@ -338,7 +336,7 @@ A production version could automatically generate the previous week's summary th
 
 ### Single User
 
-The challenge implementation is intentionally designed as a single-user application.
+The application is designed for a single user.
 
 Authentication, authorization, and multi-tenant data ownership were considered outside the current scope.
 
@@ -356,9 +354,9 @@ They were used primarily for:
 - code review
 - documentation support
 
-Architectural decisions, backend data modeling, API behavior, analytics logic, persistence strategy, retrieval architecture, and implementation tradeoffs were reviewed and understood by the author. Suggestions from AI tooling were challenged, revised, or rejected when they did not fit the intended design.
+Architectural decisions, backend data modeling, API behavior, analytics logic, persistence strategy, retrieval architecture, and implementation tradeoffs were reviewed and understood by the author. Suggestions from AI tooling were reviewed, revised, or rejected when they did not fit the intended design.
 
-The use of AI tooling is intentionally disclosed rather than hidden, and `DECISIONS.md` contains additional context around the reasoning behind key implementation choices.
+The use of AI tooling is disclosed rather than hidden.
 
 ---
 
